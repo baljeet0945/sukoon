@@ -17,9 +17,12 @@ class AdminController extends Controller
     
     public function dashboard()
     {
-        //$count = Product::where('status','=','1')->count();
+        
         $product = Product::where('status',1)->count();
         $daily = Dailysale::all()->sum('amount');
+        // if ($daily >= 1000) {
+        //     return number_format(($daily / 1000)) . 'k';
+        // } 
         $expen = Expen::all()->sum('price');
         return view('pages.backend.dashboard',compact('product','daily','expen'));
     }
@@ -61,13 +64,23 @@ class AdminController extends Controller
         return response()->json(['success'=>'Status change successfully.']);
     }
 
-    public function changeCategory(Request $request)
+    public function changeCategorystatus(Request $request)
     {
         $category = Category::find($request->category_id);
         $category->status = $request->status;
         $category->save();
   
         return response()->json(['success'=>'Status change successfully.']);
+    }
+
+    public function changeEcatestatus(Request $request)
+    {
+        $excate = Excate::find($request->excate_id);
+        $excate->status = $request->status;
+        $excate->save();
+
+        return response()->json(['success'=>'Status change successfully.']);
+
     }
 
     public function logout()

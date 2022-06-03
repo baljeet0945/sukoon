@@ -66,7 +66,10 @@
                                             <tr>
                                                 <th>{{ $no++ }}</th>
                                                 <td>{{ $cata->name }}</td>
-                                                <td <input data-id="{{$cata->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $cata->status ? 'checked' : '' }}></td>
+                                                <td <input data-id="{{ $cata->id }}" class="toggle-class"
+                                                    type="checkbox" data-onstyle="success" data-offstyle="danger"
+                                                    data-toggle="toggle" data-on="Active" data-off="Suspend"
+                                                    {{ $cata->status ? 'checked' : '' }}></td>
                                                 <td>{{ $cata->created_at->format('d M,Y') }}</td>
                                                 <td>
                                                     <div class="dropdown">
@@ -116,6 +119,7 @@
     @push('js')
     <script src="{{ asset('backend/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/js/plugins-init/datatables.init.js') }}"></script>
+    
 
     <script>
         $('#expensivecategory').DataTable({
@@ -131,13 +135,13 @@
     $(function() {
       $('.toggle-class').change(function() {
           var status = $(this).prop('checked') == true ? 1 : 0; 
-          var user_id = $(this).data('id'); 
+          var excate_id = $(this).data('id'); 
            console.log(status);
           $.ajax({
               type: "GET",
               dataType: "json",
-              url: '/userChangeStatus',
-              data: {'status': status, 'user_id': user_id},
+              url: '/admin/changeEcatestatus',
+              data: {'status': status, 'excate_id': excate_id},
               success: function(data){
                 console.log(data.success)
               }

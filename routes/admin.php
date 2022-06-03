@@ -22,7 +22,9 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
 
        Route::get('changeStatus', 'AdminController@changeStatus');
 
-       Route::get('change', 'AdminController@changeCategory');
+       Route::get('changeCategorystatus', 'AdminController@changeCategorystatus');
+
+       Route::get('changeEcatestatus','AdminController@changeEcatestatus');
        
        Route::get('logout','AdminController@logout')->name('admin.logout');
 

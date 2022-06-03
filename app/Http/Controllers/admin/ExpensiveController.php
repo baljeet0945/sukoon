@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Expen;
 use App\Models\Excate;
 use App\Models\Category;
+use Session;
 class ExpensiveController extends Controller
 {
     /**
@@ -124,9 +125,11 @@ class ExpensiveController extends Controller
     public function destroy($id)
     {
         $expen = Expen::findorfail($id);
-        $excate = Excate::findorfail($id);
+        $excate = Excate::findorfail($expen->excate_id);
         $expen->delete();
         $expen->delete();
-        return redirect()->route('admin.expens.create')->with('message', 'Expensive Delete Successfuly!');
+        Session()->flash('message', 'Delete Expensive Successfully!');
+        return ['status' => 'true'];
+        
     }
 }

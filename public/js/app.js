@@ -19874,6 +19874,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addToCart: function addToCart(item) {
+      item['cart'] = 'Added';
+      item['qty'] = 1;
       this.$emit('update-cart', item); //this.cart = 'Added'
     }
   }
@@ -19957,61 +19959,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   components: {
     MenuItem: _components_MenuItems_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  computed: {
-    subtotal: function subtotal() {
-      var price = 0;
-      this.carts.map(function (item) {
-        price += item['qty'] * item['price'];
-      });
-      return price;
-    }
-  },
   data: function data() {
     return {
       categories: [],
       products: [],
-      categoryA: 35,
+      categoryA: '0',
       // for first load and in curent path
-      carts: [],
-      selectedCat: ''
+      carts: []
     };
   },
   methods: {
-    menuItem: function menuItem(category) {
+    menuItem: function menuItem(categoryId) {
       var _this = this;
 
-      this.categoryA = category.id;
-      axios.get('api/products/' + category.id).then(function (response) {
+      axios.get('api/products/' + categoryId).then(function (response) {
         _this.products = response.data;
       });
     },
     updateCart: function updateCart(item) {
-      var findProduct = this.carts.find(function (o) {
-        return o.id === item.id;
-      });
-
-      if (findProduct) {
-        findProduct.qty += 1;
-        return;
-      }
-
-      item['qty'] = 1;
+      console.log(item);
       this.carts.push(item);
     },
     updateItemQty: function updateItemQty(item, updateType) {
       for (var i = 0; i < this.carts.length; i++) {
         if (this.carts[i].id === item.id) {
           if (updateType === 'subtract') {
-            if (this.carts[i].qty !== 1) {
+            if (this.carts[i].qty !== 0) {
               this.carts[i].qty--;
-            } else {
-              this.carts.splice(i, 1);
             }
           } else {
             this.carts[i].qty++;
           }
 
-          this.subtotal;
           break;
         }
       }
@@ -20033,24 +20012,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 3:
               res = _context.sent;
               _this2.categories = res.data;
-              _this2.categoryA = res.data[0].id;
-
-              _this2.menuItem(res.data[0]);
-
-              _context.next = 12;
+              _context.next = 10;
               break;
 
-            case 9:
-              _context.prev = 9;
+            case 7:
+              _context.prev = 7;
               _context.t0 = _context["catch"](0);
               console.log(_context.t0);
 
-            case 12:
+            case 10:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[0, 9]]);
+      }, _callee, null, [[0, 7]]);
     }))();
   },
   mounted: function mounted() {
@@ -21559,84 +21534,32 @@ var _hoisted_16 = {
   "class": "cart__quantity"
 };
 var _hoisted_17 = ["onClick"];
-var _hoisted_18 = {
-  "class": "card-order-footer"
-};
-var _hoisted_19 = {
-  "class": "amount-details"
-};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"card-order-footer\"><div class=\"amount-details\"><h5 class=\"d-flex text-right mb-3\"><span class=\"text\">Sub total </span><span class=\"me-0 ms-auto\">43.00</span></h5><h5 class=\"d-flex text-right mb-3\"><span class=\"text\">Tax</span><span class=\"me-0 ms-auto\"> 3.00</span></h5><h5 class=\"d-flex text-right mb-3\"><span class=\"text\">Other Charge</span><span class=\"me-0 ms-auto\">0.00</span></h5></div><div class=\"amount-payble\"><h5 class=\"d-flex text-right mb-0\"><span class=\"text\">Amount to Pay</span><span class=\"me-0 ms-auto\">46.00</span></h5></div><div class=\"btn_box\"><div class=\"row no-gutter mx-0\"><a href=\"javascript:void(0);\" id=\"home-counter-tab\" class=\"btn btn-danger btn-block col-6 m-0 rounded-0\">Cancel</a><a href=\"javascript:void(0);\" id=\"place-order-tab\" class=\"btn btn-primary btn-block col-6 m-0 rounded-0\">Place Order</a></div></div></div>", 1);
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"h-100\" id=\"place-order\"><div class=\"card rounded-0\"><div class=\"card-body\"><form><h4 class=\"mb-4\">Amount to Pay <strong> $46.00 </strong></h4><div class=\"form-group mb-4 pb-2\"><label class=\"font-w600\">Select Payment Method</label><div class=\"row no-gutters align-items-center\"><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input checked=\"\" type=\"radio\" id=\"cash\" name=\"PaymentMethod\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"cash\"><span class=\"ms-2\">Cash</span></label></div></div><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input type=\"radio\" id=\"card\" name=\"PaymentMethod\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"card\"><span class=\"ms-2\">Card</span></label></div></div></div></div><div class=\"form-group mb-4 pb-2\"><label class=\"font-w600\">Order type</label><div class=\"row no-gutters align-items-center\"><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input checked=\"\" type=\"radio\" id=\"takeaway\" name=\"OrderType\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"takeaway\"><span class=\"ms-2\">Takeaway</span></label></div></div><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input type=\"radio\" id=\"dine-in\" name=\"OrderType\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"dine-in\"><span class=\"ms-2\">Dine-in</span></label></div></div><div class=\"col-12 col-sm-12 col-md-6 col-lg-4\"><div class=\"select_box style-1 w-100 d-flex\"><select class=\"default-select\"><option>Select Table</option><option>Table No 01</option><option>Table No 02</option><option>Table No 03</option><option>Table No 04</option><option>Table No 05</option><option>Table No 06</option><option>Table No 07</option><option>Table No 08</option><option>Table No 09</option><option>Table No 10</option></select></div></div></div></div><div class=\"form-group\"><label class=\"font-w600\">Customer Info (Optional)</label><input type=\"text\" class=\"form-control solid\" placeholder=\"Enter Full Name\"></div><div class=\"form-group\"><input type=\"text\" class=\"form-control solid\" placeholder=\"Enter Phone Number\"></div></form></div></div><div class=\"card-order-footer\"><div class=\"btn_box\"><div class=\"row no-gutter mx-0\"><a href=\"javascript:void(0);\" id=\"place-order-cancel\" class=\"btn btn-danger btn-block col-6 m-0 rounded-0\">Cancel</a><a href=\"front-home.html\" class=\"btn btn-primary btn-block col-6 m-0 rounded-0\">Submit</a></div></div></div></div>", 1);
+
 var _hoisted_20 = {
-  "class": "d-flex text-right mb-3"
-};
-
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text"
-}, "Sub total ", -1
-/* HOISTED */
-);
-
-var _hoisted_22 = {
-  "class": "me-0 ms-auto"
-};
-
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<h5 class=\"d-flex text-right mb-3\"><span class=\"text\">Tax</span><span class=\"me-0 ms-auto\"> 3.00</span></h5><h5 class=\"d-flex text-right mb-3\"><span class=\"text\">Other Charge</span><span class=\"me-0 ms-auto\">0.00</span></h5>", 2);
-
-var _hoisted_25 = {
-  "class": "amount-payble"
-};
-var _hoisted_26 = {
-  "class": "d-flex text-right mb-0"
-};
-
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text"
-}, "Amount to Pay", -1
-/* HOISTED */
-);
-
-var _hoisted_28 = {
-  "class": "me-0 ms-auto"
-};
-
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "btn_box"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "row no-gutter mx-0"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:void(0);",
-  id: "home-counter-tab",
-  "class": "btn btn-danger btn-block col-6 m-0 rounded-0"
-}, "Cancel"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:void(0);",
-  id: "place-order-tab",
-  "class": "btn btn-primary btn-block col-6 m-0 rounded-0"
-}, "Place Order")])], -1
-/* HOISTED */
-);
-
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"h-100\" id=\"place-order\"><div class=\"card rounded-0\"><div class=\"card-body\"><form><h4 class=\"mb-4\">Amount to Pay <strong> $46.00 </strong></h4><div class=\"form-group mb-4 pb-2\"><label class=\"font-w600\">Select Payment Method</label><div class=\"row no-gutters align-items-center\"><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input checked=\"\" type=\"radio\" id=\"cash\" name=\"PaymentMethod\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"cash\"><span class=\"ms-2\">Cash</span></label></div></div><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input type=\"radio\" id=\"card\" name=\"PaymentMethod\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"card\"><span class=\"ms-2\">Card</span></label></div></div></div></div><div class=\"form-group mb-4 pb-2\"><label class=\"font-w600\">Order type</label><div class=\"row no-gutters align-items-center\"><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input checked=\"\" type=\"radio\" id=\"takeaway\" name=\"OrderType\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"takeaway\"><span class=\"ms-2\">Takeaway</span></label></div></div><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input type=\"radio\" id=\"dine-in\" name=\"OrderType\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"dine-in\"><span class=\"ms-2\">Dine-in</span></label></div></div><div class=\"col-12 col-sm-12 col-md-6 col-lg-4\"><div class=\"select_box style-1 w-100 d-flex\"><select class=\"default-select\"><option>Select Table</option><option>Table No 01</option><option>Table No 02</option><option>Table No 03</option><option>Table No 04</option><option>Table No 05</option><option>Table No 06</option><option>Table No 07</option><option>Table No 08</option><option>Table No 09</option><option>Table No 10</option></select></div></div></div></div><div class=\"form-group\"><label class=\"font-w600\">Customer Info (Optional)</label><input type=\"text\" class=\"form-control solid\" placeholder=\"Enter Full Name\"></div><div class=\"form-group\"><input type=\"text\" class=\"form-control solid\" placeholder=\"Enter Phone Number\"></div></form></div></div><div class=\"card-order-footer\"><div class=\"btn_box\"><div class=\"row no-gutter mx-0\"><a href=\"javascript:void(0);\" id=\"place-order-cancel\" class=\"btn btn-danger btn-block col-6 m-0 rounded-0\">Cancel</a><a href=\"front-home.html\" class=\"btn btn-primary btn-block col-6 m-0 rounded-0\">Submit</a></div></div></div></div>", 1);
-
-var _hoisted_31 = {
   "class": "row"
 };
-var _hoisted_32 = {
+var _hoisted_21 = {
   "class": "col-xl-12"
 };
-var _hoisted_33 = {
+var _hoisted_22 = {
   "class": "owl-carousel owl-theme"
 };
-var _hoisted_34 = ["onClick"];
-var _hoisted_35 = ["src"];
-var _hoisted_36 = {
+var _hoisted_23 = ["onClick"];
+var _hoisted_24 = ["src"];
+var _hoisted_25 = {
   "class": "title mb-0"
 };
-var _hoisted_37 = {
+var _hoisted_26 = {
   "class": "col-xl-12"
 };
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"input-group search-area style-1 mb-4\"><input type=\"text\" class=\"form-control\" placeholder=\"Search here...\"><div class=\"input-group-append\"><button class=\"btn btn-primary btn-rounded\">Search<i class=\"flaticon-381-search-2 scale3 ms-3\"></i></button></div></div>", 1);
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"input-group search-area style-1 mb-4\"><input type=\"text\" class=\"form-control\" placeholder=\"Search here...\"><div class=\"input-group-append\"><button class=\"btn btn-primary btn-rounded\">Search<i class=\"flaticon-381-search-2 scale3 ms-3\"></i></button></div></div>", 1);
 
-var _hoisted_39 = {
+var _hoisted_28 = {
   "class": "row"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -21670,34 +21593,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     )]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.subtotal) + ".00", 1
-  /* TEXT */
-  )]), _hoisted_23]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.subtotal) + ".00", 1
-  /* TEXT */
-  )])]), _hoisted_29])]), _hoisted_30])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.categories, function (category) {
+  ))])])])])]), _hoisted_18]), _hoisted_19])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.categories, function (category, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "items",
-      key: category.id
+      key: index
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["item-box", {
-        active: $data.categoryA == category.id
-      }]),
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["item-box", [$data.categoryA == index ? 'active' : '']]),
       onClick: function onClick($event) {
-        return $options.menuItem(category);
+        return $options.menuItem(category.id);
       }
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: 'uploads/category/' + category.image,
       alt: ""
     }, null, 8
     /* PROPS */
-    , _hoisted_35), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.title), 1
+    , _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.title), 1
     /* TEXT */
     )], 10
     /* CLASS, PROPS */
-    , _hoisted_34)]);
+    , _hoisted_23)]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.products, function (product) {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.products, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_menu_item, {
       product: product,
       key: product.id,
