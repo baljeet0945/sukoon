@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
 use DB;
+use Session;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
@@ -149,6 +150,7 @@ class CategoryController extends Controller
 
             $category->delete();
 
-            return redirect()->route('admin.category.create')->with('message','Category Deleted Successfully');
+            Session()->flash('message', 'Delete Menu Category Successfully!');
+             return ['status' => 'true'];
     }
 }

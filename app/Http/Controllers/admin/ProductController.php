@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use Session;
 class ProductController extends Controller
 {
     /**
@@ -139,11 +140,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findorfail($id);
-        $product = Category::findorfail($id);
+        $category = Category::findorfail($product->category_id);
         $product->delete();
         $category->delete();
-
-        return redirect()->route('admin.product.create')->with('message','Product Deleted Successfully');
+                
+        Session()->flash('message', 'Delete Menu Successfully!');
+        return ['status' => 'true'];
     }
 
    

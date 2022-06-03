@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Models\Dailysale;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Session;
 
 class DailysaleController extends Controller
 {
@@ -112,6 +113,8 @@ class DailysaleController extends Controller
         $daily = Dailysale::findorfail($id);
 
         $daily->delete();
-        return redirect()->route('admin.daily.create')->with('message', 'Daily Sale Deleted Successfuly!');
+        Session()->flash('message', 'Delete Daily Sale Successfully!');
+        return ['status' => 'true'];
+        
     }
 }

@@ -7,19 +7,19 @@
                 <div class="col-xl-12 col-lg-12">
                     <div class="card">
                         @if (session()->has('message'))
-                                <div class="alert alert-success" id="msg">
-                                    {{ session()->get('message') }}
-                                </div>
-                            @endif
+                            <div class="alert alert-success" id="msg">
+                                {{ session()->get('message') }}
+                            </div>
+                        @endif
                         <div class="card-header">
-                            
+
                             <h4 class="card-title">Add Daily Sale</h4>
                         </div>
                         <div class="card-body">
                             <div class="basic-form">
                                 <form action="{{ route('admin.daily.store') }}" method="post"
                                     enctype="multipart/form-data">
-                                    
+
                                     @csrf
 
                                     <div class="mb-3 row">
@@ -79,7 +79,7 @@
                                             <tr>
                                                 <th>{{ $no++ }}</th>
                                                 <td>{{ $data->date }}</td>
-                                    
+
                                                 <td> &#8377; {{ $data->amount }}</td>
                                                 <td>
                                                     <div class="dropdown">
@@ -99,12 +99,8 @@
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item"
                                                                 href="{{ route('admin.daily.edit', $data->id) }}">Edit</a>
-                                                            <form method="post" action="{{ route('admin.daily.destroy',$data->id) }}">
-                                                                @method('delete')
-                                                                @csrf
-                                                                <button type="submit"
-                                                                    class="btn btn-danger btn-sm">Delete</button>
-                                                            </form>
+                                                            <a class="dropdown-item"
+                                                                onclick="deleteDailysale('{{ route('admin.daily.destroy', $data->id) }}')">Delete</a>
 
                                                         </div>
                                                     </div>
@@ -127,8 +123,8 @@
 
 @push('css')
     <link href="{{ asset('backend/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    @endpush
-    @push('js')
+@endpush
+@push('js')
     <script src="{{ asset('backend/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/js/plugins-init/datatables.init.js') }}"></script>
 
@@ -140,5 +136,5 @@
                 [16, 32, 64, "All"]
             ]
         });
-        </script>
-        @endpush
+    </script>
+@endpush
