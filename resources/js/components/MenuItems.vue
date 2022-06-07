@@ -30,9 +30,7 @@ export default {
         };
     },   
     methods: {
-        addToCart: function (item) {            
-          item['cart'] = 'Added'; 
-          item['qty'] = 1;         
+        addToCart: function (item) { 
           this.$emit('update-cart', item)
           //this.cart = 'Added'
         }

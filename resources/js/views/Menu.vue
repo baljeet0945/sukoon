@@ -63,7 +63,7 @@
 								<div class="amount-details">
 									<h5 class="d-flex text-right mb-3">
 										<span class="text">Sub total </span>
-										<span class="me-0 ms-auto">43.00</span>
+										<span class="me-0 ms-auto">{{subtotal}}.00</span>
 									</h5>
 									<h5 class="d-flex text-right mb-3">
 										<span class="text">Tax</span>
@@ -77,7 +77,7 @@
 								<div class="amount-payble">
 									<h5 class="d-flex text-right mb-0">
 										<span class="text">Amount to Pay</span>
-										<span class="me-0 ms-auto">46.00</span>
+										<span class="me-0 ms-auto">{{subtotal}}.00</span>
 									</h5>
 								</div>
 
@@ -170,9 +170,9 @@
                 <div class="row">
 					<div class="col-xl-12">
 						<div class="owl-carousel owl-theme">
-							<div class="items" v-for="(category, index) of categories" :key="index">
+							<div class="items" v-for="category in this.categories" :key="category.id">
 								<div class="item-box" 
-								:class="[(categoryA == index) ? 'active':'']" @click="menuItem(category.id)">
+								:class="{active: categoryA == category.id}" @click="menuItem(category)">
 									<img :src="'uploads/category/'+category.image" alt="">
 									<h5 class="title mb-0">{{ category.title }}</h5>
 								</div>
@@ -208,35 +208,54 @@
 		components:{
 			MenuItem
 		},
+		computed:{
+			subtotal(){
+				let price = 0;
+				this.carts.map(item => {
+					price += item['qty']*item['price']
+				})
+				return price
+			}
+		},
 		data() {
 			return {
 				categories: [],
 				products: [],
-				categoryA:'0', // for first load and in curent path
+				categoryA:35, // for first load and in curent path
 				carts: [],
+				selectedCat:''
 			};
 		},		
 		methods: {
-			menuItem: function (categoryId) {
-				axios.get('api/products/'+categoryId)
+			menuItem: function (category) {
+				this.categoryA = category.id;
+				axios.get('api/products/'+category.id)
 					.then((response)=>{
 					this.products = response.data
 				})
 			},
 			updateCart(item) {
-				console.log(item)
-				this.carts.push(item);				 
+				var findProduct = this.carts.find(o => o.id === item.id)
+				if(findProduct){
+					findProduct.qty +=1;
+					return;
+				}
+				item['qty'] = 1; 
+				this.carts.push(item);								 
 			},
 			updateItemQty(item, updateType) {      
 				for (let i = 0; i < this.carts.length; i++) {
 					if (this.carts[i].id === item.id) {
 						if (updateType === 'subtract') {
-						if (this.carts[i].qty !== 0) {
-							this.carts[i].qty--;
-						}
+							if (this.carts[i].qty !== 1) {
+								this.carts[i].qty--;
+							}else {
+								this.carts.splice(i, 1);
+							}
 						} else {
 							this.carts[i].qty++;
 						}
+						this.subtotal
 						break;
 					}
 				}		
@@ -246,6 +265,9 @@
 			try {
 			const res = await axios.get('api/category');
 				this.categories = res.data;
+				this.categoryA = res.data[0].id
+				this.menuItem(res.data[0])
+
 			} catch (error) {
 				console.log(error);
 			}			
