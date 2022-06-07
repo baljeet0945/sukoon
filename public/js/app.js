@@ -20829,7 +20829,7 @@ var _hoisted_5 = {
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "assets/images/logo-text.png",
+  src: "backend/images/sukoon.png",
   alt: ""
 }, null, -1
 /* HOISTED */

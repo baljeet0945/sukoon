@@ -6,7 +6,7 @@
 					<div class="container-fluid clearfix">
 						<!-- Website Logo -->
 						<div class="logo-header mostion logo-dark">
-							  <router-link to="/menu"><img src="assets/images/logo-text.png" alt=""></router-link>
+							  <router-link to="/menu"><img src="backend/images/sukoon.png" alt=""></router-link>
 						</div>
 						<!-- Nav Toggle Button -->
 						<button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
