@@ -20,11 +20,10 @@ class AdminController extends Controller
         
         $product = Product::where('status',1)->count();
         $daily = Dailysale::all()->sum('amount');
-        // if ($daily >= 1000) {
-        //     return number_format(($daily / 1000)) . 'k';
-        // } 
+         
         $expen = Expen::all()->sum('price');
-        return view('pages.backend.dashboard',compact('product','daily','expen'));
+        $graph = array($expen);
+        return view('pages.backend.dashboard',compact('product','daily','expen','graph'));
     }
 
     public function signin()

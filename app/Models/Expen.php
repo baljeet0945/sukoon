@@ -13,7 +13,7 @@ class Expen extends Model
                 'excate_id','name','price'
     ];
 
-    public function Excate(){
-        return $this->hasOne(Excate::class,'id','expen_id');
+    public function excate(){
+        return $this->hasOne(Excate::class,'expen_id','id');
     }
 }
