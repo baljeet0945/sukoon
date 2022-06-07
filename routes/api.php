@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,7 +20,8 @@ Route::middleware('api')->group(function () {
     Route::resources ([
         'products' => ProductController::class,
         'category'   => CategoryController::class,
-    ]);
+    ]); 
+    Route::post('order', 'OrderController@add');
 });
 
 

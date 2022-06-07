@@ -129,7 +129,6 @@
 									</div>
 								</div>
 							</div>
-							<input type="hidden" v-model="placeOrderForm.totalValue" />
 							</form>
 						</div>
 					</div>
@@ -181,6 +180,7 @@
 				this.carts.map(item => {
 					price += item['qty']*item['price']
 				})
+				this.placeOrderForm.totalValue = price		
 				return price
 			}
 		},
@@ -192,11 +192,10 @@
 				carts: [],
 				selectedCat:'',
 				placeOrderForm:{
-					paymentMethod:'',
+					paymentMethod:'cash                                                                                                                                                                       ',
 					name:'',
 					phone:'',
 					totalValue:0
-
 				}
 			};
 		},		
@@ -230,15 +229,18 @@
 							this.carts[i].qty++;
 						}
 						this.subtotal
-						//this.placeOrderForm.totalValue = this.subtotal
 						break;
 					}
 				}		
 			},
-			placeOrder(e){
+			placeOrder(){
+				let formData = new FormData();
+				formData.append('order-items', this.carts)
+				formData.append('order-info', this.placeOrderForm)
 				console.log(this.carts);
 				console.log(this.placeOrderForm);
-				console.log(this.subtotal);
+				axios.post('api/order',{'order-item':this.carts, 'order-info':this.placeOrderForm})
+                .then(response => {this.message = response.data})
 			}			
 		},
 		async created() {

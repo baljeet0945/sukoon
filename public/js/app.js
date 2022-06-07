@@ -19963,6 +19963,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.carts.map(function (item) {
         price += item['qty'] * item['price'];
       });
+      this.placeOrderForm.totalValue = price;
       return price;
     }
   },
@@ -19975,7 +19976,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       carts: [],
       selectedCat: '',
       placeOrderForm: {
-        paymentMethod: '',
+        paymentMethod: 'cash                                                                                                                                                                       ',
         name: '',
         phone: '',
         totalValue: 0
@@ -20017,20 +20018,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             this.carts[i].qty++;
           }
 
-          this.subtotal; //this.placeOrderForm.totalValue = this.subtotal
-
+          this.subtotal;
           break;
         }
       }
     },
-    placeOrder: function placeOrder(e) {
+    placeOrder: function placeOrder() {
+      var _this2 = this;
+
+      var formData = new FormData();
+      formData.append('order-items', this.carts);
+      formData.append('order-info', this.placeOrderForm);
       console.log(this.carts);
       console.log(this.placeOrderForm);
-      console.log(this.subtotal);
+      axios.post('api/order', {
+        'order-item': this.carts,
+        'order-info': this.placeOrderForm
+      }).then(function (response) {
+        _this2.message = response.data;
+      });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var res;
@@ -20044,10 +20054,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 3:
               res = _context.sent;
-              _this2.categories = res.data;
-              _this2.categoryA = res.data[0].id;
+              _this3.categories = res.data;
+              _this3.categoryA = res.data[0].id;
 
-              _this2.menuItem(res.data[0]);
+              _this3.menuItem(res.data[0]);
 
               _context.next = 12;
               break;
@@ -21762,7 +21772,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )]), _hoisted_23]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.subtotal) + ".00", 1
   /* TEXT */
   )])]), _hoisted_29])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.placeOrder && $options.placeOrder.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, " $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.subtotal), 1
@@ -21804,14 +21814,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "Enter Phone Number"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.placeOrderForm.phone]])])])]), _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "hidden",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.placeOrderForm.totalValue = $event;
-    })
-  }, null, 512
-  /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.placeOrderForm.totalValue]])], 32
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.placeOrderForm.phone]])])])]), _hoisted_47], 32
   /* HYDRATE_EVENTS */
   )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.categories, function (category) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
