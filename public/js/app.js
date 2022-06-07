@@ -19874,6 +19874,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addToCart: function addToCart(item) {
+      item['cart'] = 'Added';
+      item['qty'] = 1;
       this.$emit('update-cart', item); //this.cart = 'Added'
     }
   }
@@ -20840,7 +20842,7 @@ var _hoisted_5 = {
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: "backend/images/sukoon.png",
+  src: "assets/images/logo-text.png",
   alt: ""
 }, null, -1
 /* HOISTED */
@@ -21804,11 +21806,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.placeOrderForm.phone]])])])]), _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    type: "text",
+    type: "hidden",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $data.placeOrderForm.totalValue = $event;
-    }),
-    value: "{{subtotal}}"
+    })
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.placeOrderForm.totalValue]])], 32

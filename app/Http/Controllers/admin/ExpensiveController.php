@@ -30,8 +30,8 @@ class ExpensiveController extends Controller
         //$data =Expen::all();
         $excate = Excate::all();
         $data = Expen::join('excates', function ($join) {
-                $join->on('excates.id', '=', 'expens.excate_id');   
-        })->get();
+                            $join->on('excates.id', '=', 'expens.excate_id');   
+                            })->get();
         
         return view('pages.backend.expensive.create',compact('data','excate'))->with('no',1);
 

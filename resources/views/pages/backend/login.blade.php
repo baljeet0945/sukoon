@@ -31,7 +31,7 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
 									<div class="text-center mb-3">
-										<a href="index.html"><img src="{{ asset('backend/images/logo-full.png') }}" alt=""></a>
+										<a href="index.html"><img  style="width:250px;"src="{{ asset('backend/images/sukoon.png') }}" alt=""></a>
 									</div>
                                     <h4 class="text-center mb-4">Sign in your account</h4>
                                     <form action="{{ route('admin.login') }}" method="post">

@@ -129,7 +129,7 @@
 									</div>
 								</div>
 							</div>
-							<input type="text" v-model="placeOrderForm.totalValue" value="{{subtotal}}"/>
+							<input type="hidden" v-model="placeOrderForm.totalValue" />
 							</form>
 						</div>
 					</div>
