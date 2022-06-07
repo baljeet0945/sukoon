@@ -230,6 +230,7 @@
 							this.carts[i].qty++;
 						}
 						this.subtotal
+						//this.placeOrderForm.totalValue = this.subtotal
 						break;
 					}
 				}		

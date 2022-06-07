@@ -19874,9 +19874,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addToCart: function addToCart(item) {
-      item['cart'] = 'Added';
-      item['qty'] = 1;
-      this.$emit('update-cart', item); //this.cart = 'Added'
+      this.$emit('update-cart', item);
     }
   }
 });
@@ -20019,7 +20017,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             this.carts[i].qty++;
           }
 
-          this.subtotal;
+          this.subtotal; //this.placeOrderForm.totalValue = this.subtotal
+
           break;
         }
       }
