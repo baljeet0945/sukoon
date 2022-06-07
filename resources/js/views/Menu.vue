@@ -90,80 +90,47 @@
 							</div>
 						</div>
 						<div class="h-100" id="place-order" >
+							<form @submit.prevent="placeOrder">
 							<div class="card rounded-0">
 								<div class="card-body">
-									<form>
-										<h4 class="mb-4">Amount to Pay <strong> $46.00 </strong></h4>
+										<h4 class="mb-4">Amount to Pay <strong> ${{subtotal}} </strong></h4>
 										<div class="form-group mb-4 pb-2">
 											<label class="font-w600">Select Payment Method</label>
 											<div class="row no-gutters align-items-center">
 												<div class="col-6 col-sm-6 col-md-6 col-lg-4">
 													<div class="custom-control custom-radio">
-														<input checked="" type="radio" id="cash" name="PaymentMethod" class="custom-control-input">
+														<input checked="" type="radio" value="cash" v-model="placeOrderForm.paymentMethod" class="custom-control-input">
 														<label class="custom-control-label" for="cash"><span class="ms-2">Cash</span></label>
 													</div>
 												</div>
 												<div class="col-6 col-sm-6 col-md-6 col-lg-4">
 													<div class="custom-control custom-radio">
-														<input type="radio" id="card" name="PaymentMethod" class="custom-control-input">
+														<input type="radio" value="card" v-model="placeOrderForm.paymentMethod" class="custom-control-input">
 														<label class="custom-control-label" for="card"><span class="ms-2">Card</span></label>
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="form-group mb-4 pb-2">
-											<label class="font-w600">Order type</label>
-											<div class="row no-gutters align-items-center">
-												<div class="col-6 col-sm-6 col-md-6 col-lg-4">
-													<div class="custom-control custom-radio">
-														<input checked="" type="radio" id="takeaway" name="OrderType" class="custom-control-input">
-														<label class="custom-control-label" for="takeaway"><span class="ms-2">Takeaway</span></label>
-													</div>
-												</div>
-												<div class="col-6 col-sm-6 col-md-6 col-lg-4">
-													<div class="custom-control custom-radio">
-														<input type="radio" id="dine-in" name="OrderType" class="custom-control-input">
-														<label class="custom-control-label" for="dine-in"><span class="ms-2">Dine-in</span></label>
-													</div>
-												</div>
-
-												<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-													<div class="select_box style-1 w-100 d-flex">
-														<select class="default-select">
-															<option>Select Table</option>
-															<option>Table No 01</option>
-															<option>Table No 02</option>
-															<option>Table No 03</option>
-															<option>Table No 04</option>
-															<option>Table No 05</option>
-															<option>Table No 06</option>
-															<option>Table No 07</option>
-															<option>Table No 08</option>
-															<option>Table No 09</option>
-															<option>Table No 10</option>
-														</select>
-													</div>
-												</div>
-											</div>
-										</div>
+										
 										<div class="form-group">
 											<label class="font-w600">Customer Info (Optional)</label>
-											<input type="text" class="form-control solid" placeholder="Enter Full Name">
+											<input type="text" class="form-control solid" v-model="placeOrderForm.name" placeholder="Enter Full Name">
 										</div>
 										<div class="form-group">
-											<input type="text" class="form-control solid" placeholder="Enter Phone Number">
+											<input type="text" class="form-control solid" v-model="placeOrderForm.phone" placeholder="Enter Phone Number">
 										</div>
-									</form>
 								</div>
 							</div>
 							<div class="card-order-footer">
 								<div class="btn_box">
 									<div class="row no-gutter mx-0">
 										<a href="javascript:void(0);" id="place-order-cancel" class="btn btn-danger btn-block col-6 m-0 rounded-0">Cancel</a>
-										<a href="front-home.html" class="btn btn-primary btn-block col-6 m-0 rounded-0">Submit</a>
+										<button class="btn btn-primary btn-block col-6 m-0 rounded-0">Submit</button>
 									</div>
 								</div>
 							</div>
+							<input type="text" v-model="placeOrderForm.totalValue" value="{{subtotal}}"/>
+							</form>
 						</div>
 					</div>
 				</aside>
@@ -223,7 +190,14 @@
 				products: [],
 				categoryA:35, // for first load and in curent path
 				carts: [],
-				selectedCat:''
+				selectedCat:'',
+				placeOrderForm:{
+					paymentMethod:'',
+					name:'',
+					phone:'',
+					totalValue:0
+
+				}
 			};
 		},		
 		methods: {
@@ -259,6 +233,11 @@
 						break;
 					}
 				}		
+			},
+			placeOrder(e){
+				console.log(this.carts);
+				console.log(this.placeOrderForm);
+				console.log(this.subtotal);
 			}			
 		},
 		async created() {

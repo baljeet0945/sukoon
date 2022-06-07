@@ -19973,7 +19973,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       categoryA: 35,
       // for first load and in curent path
       carts: [],
-      selectedCat: ''
+      selectedCat: '',
+      placeOrderForm: {
+        paymentMethod: '',
+        name: '',
+        phone: '',
+        totalValue: 0
+      }
     };
   },
   methods: {
@@ -20015,6 +20021,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           break;
         }
       }
+    },
+    placeOrder: function placeOrder(e) {
+      console.log(this.carts);
+      console.log(this.placeOrderForm);
+      console.log(this.subtotal);
     }
   },
   created: function created() {
@@ -21614,29 +21625,104 @@ var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"h-100\" id=\"place-order\"><div class=\"card rounded-0\"><div class=\"card-body\"><form><h4 class=\"mb-4\">Amount to Pay <strong> $46.00 </strong></h4><div class=\"form-group mb-4 pb-2\"><label class=\"font-w600\">Select Payment Method</label><div class=\"row no-gutters align-items-center\"><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input checked=\"\" type=\"radio\" id=\"cash\" name=\"PaymentMethod\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"cash\"><span class=\"ms-2\">Cash</span></label></div></div><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input type=\"radio\" id=\"card\" name=\"PaymentMethod\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"card\"><span class=\"ms-2\">Card</span></label></div></div></div></div><div class=\"form-group mb-4 pb-2\"><label class=\"font-w600\">Order type</label><div class=\"row no-gutters align-items-center\"><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input checked=\"\" type=\"radio\" id=\"takeaway\" name=\"OrderType\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"takeaway\"><span class=\"ms-2\">Takeaway</span></label></div></div><div class=\"col-6 col-sm-6 col-md-6 col-lg-4\"><div class=\"custom-control custom-radio\"><input type=\"radio\" id=\"dine-in\" name=\"OrderType\" class=\"custom-control-input\"><label class=\"custom-control-label\" for=\"dine-in\"><span class=\"ms-2\">Dine-in</span></label></div></div><div class=\"col-12 col-sm-12 col-md-6 col-lg-4\"><div class=\"select_box style-1 w-100 d-flex\"><select class=\"default-select\"><option>Select Table</option><option>Table No 01</option><option>Table No 02</option><option>Table No 03</option><option>Table No 04</option><option>Table No 05</option><option>Table No 06</option><option>Table No 07</option><option>Table No 08</option><option>Table No 09</option><option>Table No 10</option></select></div></div></div></div><div class=\"form-group\"><label class=\"font-w600\">Customer Info (Optional)</label><input type=\"text\" class=\"form-control solid\" placeholder=\"Enter Full Name\"></div><div class=\"form-group\"><input type=\"text\" class=\"form-control solid\" placeholder=\"Enter Phone Number\"></div></form></div></div><div class=\"card-order-footer\"><div class=\"btn_box\"><div class=\"row no-gutter mx-0\"><a href=\"javascript:void(0);\" id=\"place-order-cancel\" class=\"btn btn-danger btn-block col-6 m-0 rounded-0\">Cancel</a><a href=\"front-home.html\" class=\"btn btn-primary btn-block col-6 m-0 rounded-0\">Submit</a></div></div></div></div>", 1);
-
+var _hoisted_30 = {
+  "class": "h-100",
+  id: "place-order"
+};
 var _hoisted_31 = {
-  "class": "row"
+  "class": "card rounded-0"
 };
 var _hoisted_32 = {
-  "class": "col-xl-12"
+  "class": "card-body"
 };
 var _hoisted_33 = {
+  "class": "mb-4"
+};
+
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Amount to Pay ");
+
+var _hoisted_35 = {
+  "class": "form-group mb-4 pb-2"
+};
+
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-w600"
+}, "Select Payment Method", -1
+/* HOISTED */
+);
+
+var _hoisted_37 = {
+  "class": "row no-gutters align-items-center"
+};
+var _hoisted_38 = {
+  "class": "col-6 col-sm-6 col-md-6 col-lg-4"
+};
+var _hoisted_39 = {
+  "class": "custom-control custom-radio"
+};
+
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "custom-control-label",
+  "for": "cash"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "ms-2"
+}, "Cash")], -1
+/* HOISTED */
+);
+
+var _hoisted_41 = {
+  "class": "col-6 col-sm-6 col-md-6 col-lg-4"
+};
+var _hoisted_42 = {
+  "class": "custom-control custom-radio"
+};
+
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "custom-control-label",
+  "for": "card"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "ms-2"
+}, "Card")], -1
+/* HOISTED */
+);
+
+var _hoisted_44 = {
+  "class": "form-group"
+};
+
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-w600"
+}, "Customer Info (Optional)", -1
+/* HOISTED */
+);
+
+var _hoisted_46 = {
+  "class": "form-group"
+};
+
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"card-order-footer\"><div class=\"btn_box\"><div class=\"row no-gutter mx-0\"><a href=\"javascript:void(0);\" id=\"place-order-cancel\" class=\"btn btn-danger btn-block col-6 m-0 rounded-0\">Cancel</a><button class=\"btn btn-primary btn-block col-6 m-0 rounded-0\">Submit</button></div></div></div>", 1);
+
+var _hoisted_48 = {
+  "class": "row"
+};
+var _hoisted_49 = {
+  "class": "col-xl-12"
+};
+var _hoisted_50 = {
   "class": "owl-carousel owl-theme"
 };
-var _hoisted_34 = ["onClick"];
-var _hoisted_35 = ["src"];
-var _hoisted_36 = {
+var _hoisted_51 = ["onClick"];
+var _hoisted_52 = ["src"];
+var _hoisted_53 = {
   "class": "title mb-0"
 };
-var _hoisted_37 = {
+var _hoisted_54 = {
   "class": "col-xl-12"
 };
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"input-group search-area style-1 mb-4\"><input type=\"text\" class=\"form-control\" placeholder=\"Search here...\"><div class=\"input-group-append\"><button class=\"btn btn-primary btn-rounded\">Search<i class=\"flaticon-381-search-2 scale3 ms-3\"></i></button></div></div>", 1);
+var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"input-group search-area style-1 mb-4\"><input type=\"text\" class=\"form-control\" placeholder=\"Search here...\"><div class=\"input-group-append\"><button class=\"btn btn-primary btn-rounded\">Search<i class=\"flaticon-381-search-2 scale3 ms-3\"></i></button></div></div>", 1);
 
-var _hoisted_39 = {
+var _hoisted_56 = {
   "class": "row"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -21674,7 +21760,60 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), _hoisted_23]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.subtotal) + ".00", 1
   /* TEXT */
-  )])]), _hoisted_29])]), _hoisted_30])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.categories, function (category) {
+  )])]), _hoisted_29])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.placeOrder && $options.placeOrder.apply($options, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, " $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.subtotal), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    checked: "",
+    type: "radio",
+    value: "cash",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.placeOrderForm.paymentMethod = $event;
+    }),
+    "class": "custom-control-input"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.placeOrderForm.paymentMethod]]), _hoisted_40])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "radio",
+    value: "card",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.placeOrderForm.paymentMethod = $event;
+    }),
+    "class": "custom-control-input"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.placeOrderForm.paymentMethod]]), _hoisted_43])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_44, [_hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control solid",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.placeOrderForm.name = $event;
+    }),
+    placeholder: "Enter Full Name"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.placeOrderForm.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control solid",
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.placeOrderForm.phone = $event;
+    }),
+    placeholder: "Enter Phone Number"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.placeOrderForm.phone]])])])]), _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.placeOrderForm.totalValue = $event;
+    }),
+    value: "{{subtotal}}"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.placeOrderForm.totalValue]])], 32
+  /* HYDRATE_EVENTS */
+  )])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_50, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.categories, function (category) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "items",
       key: category.id
@@ -21690,14 +21829,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       alt: ""
     }, null, 8
     /* PROPS */
-    , _hoisted_35), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.title), 1
+    , _hoisted_52), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_53, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.title), 1
     /* TEXT */
     )], 10
     /* CLASS, PROPS */
-    , _hoisted_34)]);
+    , _hoisted_51)]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.products, function (product) {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [_hoisted_55, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_56, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(this.products, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_menu_item, {
       product: product,
       key: product.id,
