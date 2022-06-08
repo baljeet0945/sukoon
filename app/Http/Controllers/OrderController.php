@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -11,36 +12,19 @@ class OrderController extends Controller
     {
 
         // $validated = $request->validate([
-        //     'title'         => 'required',
-        //     'image'         => 'required',
-        //     'description'   => 'required',
-        //     'sub_category'  => 'required',
+        //     'name'         => 'required',
+        //     'phone'         => 'required',
+            
 
         // ]);
-
-        //$order = new Order();
-        return $request;
-
-        // $categories->title        = $request->title;
-        // $categories->description  = $request->description;
-        // $categories->sub_category = $request->sub_category;
+        //return $request;
+        $order = new Order;
+        //return $request;
+        $order->user_id  = auth()->user()->id ?? null;
+        $order->amount   = $request->amount;
         
         
-        // if($request->hasfile('image'))
-        // {
-        //     $file= $request->file('image');
-        //     $extension=$file->getClientOriginalExtension();
-        //     $filename=time().'.'.$extension;
-        //     $file->move('uploads/category/',$filename);
-        //     $categories->image=$filename;
-        // }
-        
-        // $categories->save();
-
-
-        // return redirect()
-        //                 ->route('admin.category.create')
-        //                 ->with('message','Category Created Successfuly!');
-
+        $order->save();
+  
     }
 }

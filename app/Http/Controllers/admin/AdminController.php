@@ -22,13 +22,10 @@ class AdminController extends Controller
         $daily = Dailysale::all()->sum('amount');
          
         $expen = Expen::all()->sum('price');
-        // $graph = array($expen);
-        $date = $request->has('date') ? $request->date : date('D');
-        $users = Expen::select(\DB::raw("COUNT(*) as count"))
-                        ->whereYear('created_at', $date)
-                        ->groupBy(\DB::raw("Date(created_at)"))
-                        ->pluck('count');
-        return view('pages.backend.dashboard',compact('product','daily','expen','date','users'));
+        
+        $object=$daily-$expen;
+        
+        return view('pages.backend.dashboard',compact('product','daily','expen','object'));
     }
 
     public function signin()
