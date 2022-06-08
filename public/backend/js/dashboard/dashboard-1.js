@@ -262,115 +262,121 @@
         chart.render();
 	}
 	
-	// var chartBar = function(){
-		
-	// 	var options = {
-	// 		  series: [
-	// 			{
-	// 				name: 'Net Profit',
-	// 				data: [31, 40, 28, 51, 42, 109, 100],
-	// 				//radius: 12,	
-	// 			}, 
-	// 			{
-	// 			  name: 'Revenue',
-	// 			  data: [11, 32, 45, 32, 34, 52, 41]
-	// 			}, 
+	var chartBar = function(){
+		$.ajax({
+			type: "GET",
+			dataType: 'json',
+			url: "./admin/admin/dashbaord", 
+			 //data: { daily: daily }
+		  })
+		  console.log(chartBar)
+		var options = {
+			  series: [
+				{
+					name: 'Net Profit',
+					data: [31, 40, 28, 51, 42, 109, 100],
+					//radius: 12,	
+				}, 
+				{
+				  name: 'Revenue',
+				  data: [11, 32, 45, 32, 34, 52, 41]
+				}, 
 				
-	// 		],
-	// 			chart: {
-	// 			type: 'area',
-	// 			height: 350,
-	// 			toolbar: {
-	// 				show: false,
-	// 			},
+			],
+				chart: {
+				type: 'area',
+				height: 350,
+				toolbar: {
+					show: false,
+				},
 				
-	// 		},
-	// 		plotOptions: {
-	// 		  bar: {
-	// 			horizontal: false,
-	// 			columnWidth: '55%',
-	// 			endingShape: 'rounded'
-	// 		  },
-	// 		},
-	// 		colors:['#2f4cdd', '#b519ec'],
-	// 		dataLabels: {
-	// 		  enabled: false,
-	// 		},
-	// 		markers: {
-	// 	shape: "circle",
-	// 	},
-	// 		legend: {
-	// 			show: true,
-	// 			fontSize: '12px',
+			},
+			plotOptions: {
+			  bar: {
+				horizontal: false,
+				columnWidth: '55%',
+				endingShape: 'rounded'
+			  },
+			},
+			colors:['#2f4cdd', '#b519ec'],
+			dataLabels: {
+			  enabled: false,
+			},
+			markers: {
+		shape: "circle",
+		},
+			legend: {
+				show: true,
+				fontSize: '12px',
 				
-	// 			labels: {
-	// 				colors: '#000000',
+				labels: {
+					colors: '#000000',
 					
-	// 			},
-	// 			position: 'top',
-	// 			horizontalAlign: 'left', 	
-	// 			markers: {
-	// 				width: 19,
-	// 				height: 19,
-	// 				strokeWidth: 0,
-	// 				strokeColor: '#fff',
-	// 				fillColors: undefined,
-	// 				radius: 4,
-	// 				offsetX: -5,
-	// 				offsetY: -5	
-	// 			}
-	// 		},
-	// 		stroke: {
-	// 		  show: true,
-	// 		  width: 4,
-	// 		  colors:['#2f4cdd', '#b519ec'],
-	// 		},
+				},
+				position: 'top',
+				horizontalAlign: 'left', 	
+				markers: {
+					width: 19,
+					height: 19,
+					strokeWidth: 0,
+					strokeColor: '#fff',
+					fillColors: undefined,
+					radius: 4,
+					offsetX: -5,
+					offsetY: -5	
+				}
+			},
+			stroke: {
+			  show: true,
+			  width: 4,
+			  colors:['#2f4cdd', '#b519ec'],
+			},
 			
-	// 		grid: {
-	// 			borderColor: '#eee',
-	// 		},
-	// 		xaxis: {
+			grid: {
+				borderColor: '#eee',
+			},
+			xaxis: {
 				
-	// 		  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July'],
-	// 		  labels: {
-	// 			style: {
-	// 				colors: '#3e4954',
-	// 				fontSize: '13px',
-	// 				fontFamily: 'Poppins',
-	// 				fontWeight: 100,
-	// 				cssClass: 'apexcharts-xaxis-label',
-	// 			},
-	// 		  },
-	// 		  crosshairs: {
-	// 		  show: false,
-	// 		  }
-	// 		},
-	// 		yaxis: {
-	// 			labels: {
-	// 		   style: {
-	// 			  colors: '#3e4954',
-	// 			  fontSize: '13px',
-	// 			   fontFamily: 'Poppins',
-	// 			  fontWeight: 100,
-	// 			  cssClass: 'apexcharts-xaxis-label',
-	// 		  },
-	// 		  },
-	// 		},
-	// 		fill: {
-	// 		  opacity: 1
-	// 		},
-	// 		tooltip: {
-	// 		  y: {
-	// 			formatter: function (val) {
-	// 			  return "$ " + val + " thousands"
-	// 			}
-	// 		  }
-	// 		}
-	// 		};
+			  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July'],
+			  labels: {
+				style: {
+					colors: '#3e4954',
+					fontSize: '13px',
+					fontFamily: 'Poppins',
+					fontWeight: 100,
+					cssClass: 'apexcharts-xaxis-label',
+				},
+			  },
+			  crosshairs: {
+			  show: false,
+			  }
+			},
+			yaxis: {
+				labels: {
+			   style: {
+				  colors: '#3e4954',
+				  fontSize: '13px',
+				   fontFamily: 'Poppins',
+				  fontWeight: 100,
+				  cssClass: 'apexcharts-xaxis-label',
+			  },
+			  },
+			},
+			fill: {
+			  opacity: 1
+			},
+			tooltip: {
+			  y: {
+				formatter: function (val) {
+				  return "$ " + val + " thousands"
+				}
+			  }
+			}
+			};
 
-	// 		var chartBar1 = new ApexCharts(document.querySelector("#chartBar"), options);
-	// 		chartBar1.render();
-	// }
+			var chartBar1 = new ApexCharts(document.querySelector("#chartBar"), options);
+			chartBar1.render();
+	}
 	
 	var counterBar = function(){
 		$(".counter").counterUp({

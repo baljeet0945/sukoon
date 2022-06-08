@@ -407,7 +407,7 @@ var chartBar = function(){
           series: [
             {
                 name: 'Net Profit',
-                data: [{{ $daily}},
+                data: [ {{ $daily}},
                    
             ],
                 //radius: 12,	
@@ -473,7 +473,7 @@ var chartBar = function(){
         },
         xaxis: {
             
-          categories: ($graph),'graphp',
+          categories: [{{ $date }}]
           labels: {
             style: {
                 colors: '#3e4954',

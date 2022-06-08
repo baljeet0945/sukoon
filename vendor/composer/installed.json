@@ -64,6 +64,114 @@
             "install-path": "../brick/math"
         },
         {
+            "name": "chartisan/php",
+            "version": "1.2.1",
+            "version_normalized": "1.2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Chartisan/PHP.git",
+                "reference": "85d2352077800e9bcb411aec1ff7e4d23eef93a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Chartisan/PHP/zipball/85d2352077800e9bcb411aec1ff7e4d23eef93a1",
+                "reference": "85d2352077800e9bcb411aec1ff7e4d23eef93a1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2020-11-05T13:13:58+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Chartisan\\PHP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Èrik Campobadal Forés",
+                    "email": "soc@erik.cat"
+                }
+            ],
+            "description": "Chartisan's PHP backend",
+            "support": {
+                "issues": "https://github.com/Chartisan/PHP/issues",
+                "source": "https://github.com/Chartisan/PHP/tree/1.2.1"
+            },
+            "install-path": "../chartisan/php"
+        },
+        {
+            "name": "consoletvs/charts",
+            "version": "7.3.0",
+            "version_normalized": "7.3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Chartisan/Charts.git",
+                "reference": "b6c47dedeebf95c690f3604355ddb002677b6ae6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Chartisan/Charts/zipball/b6c47dedeebf95c690f3604355ddb002677b6ae6",
+                "reference": "b6c47dedeebf95c690f3604355ddb002677b6ae6",
+                "shasum": ""
+            },
+            "require": {
+                "chartisan/php": "^1.2.0",
+                "illuminate/console": "^7.14.1|^8.0|^9.0",
+                "illuminate/contracts": "^7.14.1|^8.0|^9.0",
+                "illuminate/http": "^7.14.1|^8.0|^9.0",
+                "illuminate/support": "^7.14.1|^8.0|^9.0",
+                "php": ">=7.4"
+            },
+            "time": "2022-02-09T15:10:47+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "ConsoleTVs\\Charts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Èrik C. Forés",
+                    "email": "soc@erik.cat"
+                }
+            ],
+            "description": "The missing charting library on laravel, powered by Chartisan",
+            "support": {
+                "issues": "https://github.com/Chartisan/Charts/issues",
+                "source": "https://github.com/Chartisan/Charts/tree/7.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ConsoleTVs",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/ErikCampobadal",
+                    "type": "patreon"
+                }
+            ],
+            "install-path": "../consoletvs/charts"
+        },
+        {
             "name": "dflydev/dot-access-data",
             "version": "v3.0.1",
             "version_normalized": "3.0.1.0",
@@ -1249,17 +1357,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.16.0",
-            "version_normalized": "9.16.0.0",
+            "version": "v9.17.0",
+            "version_normalized": "9.17.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "dbad869e737542734c48d36d4cb87ee90455c4b8"
+                "reference": "091e287678ac723c591509ca6374e4ded4a99b1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/dbad869e737542734c48d36d4cb87ee90455c4b8",
-                "reference": "dbad869e737542734c48d36d4cb87ee90455c4b8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/091e287678ac723c591509ca6374e4ded4a99b1c",
+                "reference": "091e287678ac723c591509ca6374e4ded4a99b1c",
                 "shasum": ""
             },
             "require": {
@@ -1383,7 +1491,7 @@
                 "symfony/postmark-mailer": "Required to enable support for the Postmark mail transport (^6.0).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0)."
             },
-            "time": "2022-06-02T18:13:11+00:00",
+            "time": "2022-06-07T15:09:32+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1431,17 +1539,17 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.14.8",
-            "version_normalized": "1.14.8.0",
+            "version": "v1.14.9",
+            "version_normalized": "1.14.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "04b425968c6a76940bddd2cfa40bf9e9ce78eee8"
+                "reference": "8435763e7735f6eff15b03df014cea1217fc826e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/04b425968c6a76940bddd2cfa40bf9e9ce78eee8",
-                "reference": "04b425968c6a76940bddd2cfa40bf9e9ce78eee8",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/8435763e7735f6eff15b03df014cea1217fc826e",
+                "reference": "8435763e7735f6eff15b03df014cea1217fc826e",
                 "shasum": ""
             },
             "require": {
@@ -1450,7 +1558,7 @@
                 "illuminate/support": "^8.0|^9.0",
                 "php": "^7.3|^8.0"
             },
-            "time": "2022-05-31T14:48:21+00:00",
+            "time": "2022-06-06T14:28:04+00:00",
             "bin": [
                 "bin/sail"
             ],
@@ -1759,17 +1867,17 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.2",
-            "version_normalized": "2.3.2.0",
+            "version": "2.3.3",
+            "version_normalized": "2.3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "6eddb90a9e4a1a8c5773226068fcfb48cb36812a"
+                "reference": "0da1dca5781dd3cfddbe328224d9a7a62571addc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/6eddb90a9e4a1a8c5773226068fcfb48cb36812a",
-                "reference": "6eddb90a9e4a1a8c5773226068fcfb48cb36812a",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/0da1dca5781dd3cfddbe328224d9a7a62571addc",
+                "reference": "0da1dca5781dd3cfddbe328224d9a7a62571addc",
                 "shasum": ""
             },
             "require": {
@@ -1802,7 +1910,7 @@
             "suggest": {
                 "symfony/yaml": "v2.3+ required if using the Front Matter extension"
             },
-            "time": "2022-06-03T14:07:39+00:00",
+            "time": "2022-06-07T21:28:26+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {

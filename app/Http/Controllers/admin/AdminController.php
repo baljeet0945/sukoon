@@ -15,15 +15,20 @@ class AdminController extends Controller
 {
     
     
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         
         $product = Product::where('status',1)->count();
         $daily = Dailysale::all()->sum('amount');
          
         $expen = Expen::all()->sum('price');
-        $graph = array($expen);
-        return view('pages.backend.dashboard',compact('product','daily','expen','graph'));
+        // $graph = array($expen);
+        $date = $request->has('date') ? $request->date : date('D');
+        $users = Expen::select(\DB::raw("COUNT(*) as count"))
+                        ->whereYear('created_at', $date)
+                        ->groupBy(\DB::raw("Date(created_at)"))
+                        ->pluck('count');
+        return view('pages.backend.dashboard',compact('product','daily','expen','date','users'));
     }
 
     public function signin()

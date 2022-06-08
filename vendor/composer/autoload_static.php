@@ -25,12 +25,12 @@ class ComposerStaticInit69a53e94626a78719bd05aab955773ef
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '265b4faa2b3a9766332744949e83bf97' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections/helpers.php',
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         'b4e3f29b106af37a2bb239f73cdf68c7' => __DIR__ . '/../..' . '/app/helpers.php',
     );
@@ -161,6 +161,8 @@ class ComposerStaticInit69a53e94626a78719bd05aab955773ef
         'C' => 
         array (
             'Cron\\' => 5,
+            'ConsoleTVs\\Charts\\' => 18,
+            'Chartisan\\PHP\\' => 14,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -491,6 +493,14 @@ class ComposerStaticInit69a53e94626a78719bd05aab955773ef
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
+        'ConsoleTVs\\Charts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/consoletvs/charts/src',
+        ),
+        'Chartisan\\PHP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chartisan/php/src',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -516,6 +526,7 @@ class ComposerStaticInit69a53e94626a78719bd05aab955773ef
     );
 
     public static $classMap = array (
+        'App\\Charts\\UserChart' => __DIR__ . '/../..' . '/app/Charts/UserChart.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -528,9 +539,12 @@ class ComposerStaticInit69a53e94626a78719bd05aab955773ef
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FrontendController' => __DIR__ . '/../..' . '/app/Http/Controllers/FrontendController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\ItemController' => __DIR__ . '/../..' . '/app/Http/Controllers/ItemController.php',
+        'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
         'App\\Http\\Controllers\\admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/AdminController.php',
         'App\\Http\\Controllers\\admin\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/CategoryController.php',
+        'App\\Http\\Controllers\\admin\\ChartController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/ChartController.php',
         'App\\Http\\Controllers\\admin\\DailysaleController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/DailysaleController.php',
         'App\\Http\\Controllers\\admin\\ExcateController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/ExcateController.php',
         'App\\Http\\Controllers\\admin\\ExpensiveController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/ExpensiveController.php',
@@ -550,6 +564,8 @@ class ComposerStaticInit69a53e94626a78719bd05aab955773ef
         'App\\Models\\Dailysale' => __DIR__ . '/../..' . '/app/Models/Dailysale.php',
         'App\\Models\\Excate' => __DIR__ . '/../..' . '/app/Models/Excate.php',
         'App\\Models\\Expen' => __DIR__ . '/../..' . '/app/Models/Expen.php',
+        'App\\Models\\Item' => __DIR__ . '/../..' . '/app/Models/Item.php',
+        'App\\Models\\Order' => __DIR__ . '/../..' . '/app/Models/Order.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -652,7 +668,16 @@ class ComposerStaticInit69a53e94626a78719bd05aab955773ef
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
         'Carbon\\TranslatorImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorImmutable.php',
         'Carbon\\TranslatorStrongTypeInterface' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/TranslatorStrongTypeInterface.php',
+        'Chartisan\\PHP\\ChartData' => __DIR__ . '/..' . '/chartisan/php/src/ChartData.php',
+        'Chartisan\\PHP\\Chartisan' => __DIR__ . '/..' . '/chartisan/php/src/Chartisan.php',
+        'Chartisan\\PHP\\DatasetData' => __DIR__ . '/..' . '/chartisan/php/src/DatasetData.php',
+        'Chartisan\\PHP\\ServerData' => __DIR__ . '/..' . '/chartisan/php/src/ServerData.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'ConsoleTVs\\Charts\\BaseChart' => __DIR__ . '/..' . '/consoletvs/charts/src/BaseChart.php',
+        'ConsoleTVs\\Charts\\ChartsController' => __DIR__ . '/..' . '/consoletvs/charts/src/ChartsController.php',
+        'ConsoleTVs\\Charts\\ChartsServiceProvider' => __DIR__ . '/..' . '/consoletvs/charts/src/ChartsServiceProvider.php',
+        'ConsoleTVs\\Charts\\Commands\\CreateChart' => __DIR__ . '/..' . '/consoletvs/charts/src/Commands/CreateChart.php',
+        'ConsoleTVs\\Charts\\Registrar' => __DIR__ . '/..' . '/consoletvs/charts/src/Registrar.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php',
