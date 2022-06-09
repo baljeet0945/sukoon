@@ -377,6 +377,19 @@
 			var chartBar1 = new ApexCharts(document.querySelector("#chartBar"), options);
 			chartBar1.render();
 	}
+
+	function addData(data) {
+		for (var i = 0; i < data.length; i++) {
+			dataPoints.push({
+				x: new Date(data[i].date),
+				y: data[i].units
+			});
+		}
+		console.log(dataPoints);
+		//$("#chartContainer").CanvasJSChart(options);
+	
+	}
+	$.getJSON("/net_profit/daily", addData);
 	
 	var counterBar = function(){
 		$(".counter").counterUp({

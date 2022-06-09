@@ -28,7 +28,9 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
        
        Route::get('logout','AdminController@logout')->name('admin.logout');
 
-      Route::get('chart-line', 'ChartController@chartLine');
-      Route::get('chart-line-ajax', 'ChartController@chartLineAjax');
+      //Route::get('chart-line', 'ChartController@chartLine');
+      //Route::get('chart-line-ajax', 'ChartController@chartLineAjax');
+
+      Route::get('/net_profit/{show}', 'AdminController@retriveNetProfite');
 
 });

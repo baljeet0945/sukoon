@@ -84,6 +84,17 @@ class AdminController extends Controller
 
     }
 
+    public function retriveNetProfite(Request $request)
+    {
+        return $request;
+        $excate = Excate::find($request->excate_id);
+        $excate->status = $request->status;
+        $excate->save();
+
+        return response()->json(['success'=>'Status change successfully.']);
+
+    }
+
     public function logout()
     {
         session()->forget(['adminData']);
