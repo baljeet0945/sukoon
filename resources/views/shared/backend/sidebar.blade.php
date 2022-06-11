@@ -4,12 +4,12 @@
  <div class="deznav">
      <div class="deznav-scroll">
          <ul class="metismenu" id="menu">
-             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+             <li class="{{ 'admin/dashboard' ==request()->path() ? 'active' :'' }}"><a class="has-arrow ai-icon" href="{{ route('admin.admin.dashboard') }}" aria-expanded="false">
                      <i class="flaticon-381-networking"></i>
                      <span class="nav-text">Dashboard</span>
                  </a>
                  <ul aria-expanded="false">
-                     <li><a href="{{ route('admin.admin.dashboard') }}">Dashboard</a></li>
+                     <li ><a href="">Dashboard</a></li>
                      <li><a href="page-analytics.html">Analytics</a></li>
                      <li><a href="page-review.html">Review</a></li>
                      <li><a href="page-order.html">Order</a></li>

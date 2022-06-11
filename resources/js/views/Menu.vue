@@ -243,7 +243,13 @@
 				// override the global option
 				position: "top-left",
 				});
+<<<<<<< Updated upstream
 				e.preventefault()
+=======
+				
+				
+				
+>>>>>>> Stashed changes
 			}
 
 		},

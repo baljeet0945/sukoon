@@ -12,8 +12,8 @@ class OrderController extends Controller
     public function add(Request $request)
     {
         $validated =  $request->validate([
-            'name'    => 'required',
-            'phone' => 'required',
+            'orderInfo name'    => 'required',
+            'orderInfo phone' => 'required',
             
 
         ]);
