@@ -236,8 +236,7 @@
 					}
 				}		
 			},
-			placeOrder(){		
-					
+			placeOrder(){	
 				axios.post('api/order',{'orderItem':this.carts, 'orderInfo':this.placeOrderForm})
                 .then(response => {this.message = response.data})
 				this.$toast.success(`Success!!! Your Order Successfully`,{
@@ -245,8 +244,6 @@
 				position: "top-left",
 				});
 				e.preventefault()
-				
-				
 			}
 
 		},
