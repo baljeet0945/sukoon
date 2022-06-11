@@ -13,6 +13,6 @@ class Excate extends Model
     ];
 
     public function expen(){
-        return $this->hasOne(Expen::class,'excate_id','id');
+        return $this->hasOne(Expen::class,'id','expen_id');
     }
 }

@@ -242,14 +242,7 @@
 				this.$toast.success(`Success!!! Your Order Successfully`,{
 				// override the global option
 				position: "top-left",
-				});
-<<<<<<< Updated upstream
-				e.preventefault()
-=======
-				
-				
-				
->>>>>>> Stashed changes
+				});				
 			}
 
 		},

@@ -16,6 +16,7 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
                         'expens'    => ExpensiveController::class,
                         'excates'   => ExcateController::class,
                         'daily'     => DailysaleController::class,
+                        'orders'    => OrderController::class,
 
                       ]);
 
