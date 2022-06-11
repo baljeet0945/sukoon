@@ -11,7 +11,12 @@ class OrderController extends Controller
 {
     public function add(Request $request)
     {
+        $validated =  $request->validate([
+            'name'    => 'required',
+            'phone' => 'required',
+            
 
+        ]);
         
     //return $request;
         $user = new User;

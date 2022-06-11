@@ -90,7 +90,7 @@
 							</div>
 						</div>
 						<div class="h-100" id="place-order" >							
-							<Form @submit.prevent="placeOrder">
+							<form @submit.prevent="placeOrder">
 							<div class="card rounded-0">
 								<div class="card-body">
 										<h4 class="mb-4">Amount to Pay <strong> &#8377;{{subtotal}} </strong></h4>
@@ -114,12 +114,12 @@
 										
 										<div class="form-group">
 											<label class="font-w600">Customer Info (Optional)</label>
-											<input  name="name" type="text" class="form-control solid" v-model="placeOrderForm.name" placeholder="Enter Full Name"  :rules="isRequired" >
-											<ErrorMessage class="form-required" name="name" />
+											<input type="text" class="form-control solid" v-model="placeOrderForm.name" placeholder="Enter Full Name"  >
+											
 										</div> 
 										<div class="form-group">
-											<input  name="phone" type="text" class="form-control solid" v-model="placeOrderForm.phone" placeholder="Enter Phone Number" :rules="isRequired" >
-											<ErrorMessage class="form-required" name="phone" />
+											<input type="text" class="form-control solid" v-model="placeOrderForm.phone" placeholder="Enter Phone Number">
+											
 										</div>
 								</div>
 							</div>
@@ -131,7 +131,7 @@
 									</div>
 								</div>
 							</div>
-							</Form>
+							</form>
 						</div>
 					</div>
 				</aside>
@@ -170,15 +170,10 @@
         ***********************************-->
 </template>
 <script>
-	import { Form, Field, ErrorMessage} from 'vee-validate';	
+		
 	import 'owl.carousel2/dist/owl.carousel';
 	import MenuItem from '../components/MenuItems.vue';	
-    export default {
-		components: {
-			Form,
-			Field,
-			ErrorMessage
-		},
+    export default {		
 		components:{
 			MenuItem
 		},
@@ -241,17 +236,19 @@
 					}
 				}		
 			},
-			placeOrder(){
-				
+			placeOrder(){		
+					
 				axios.post('api/order',{'orderItem':this.carts, 'orderInfo':this.placeOrderForm})
                 .then(response => {this.message = response.data})
 				this.$toast.success(`Success!!! Your Order Successfully`,{
 				// override the global option
-				position: "top-right",
+				position: "top-left",
 				});
+				e.preventefault()
 				
 				
-			}			
+			}
+
 		},
 		async created() {
 			try {
