@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Admin;
 use App\Models\Dailysale;
 use App\Models\Expen;
+use App\Models\Excate;
+use App\Models\Order;
 use Session;
 use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
@@ -24,6 +26,7 @@ class AdminController extends Controller
         $expen = Expen::all()->sum('price');
         
         $object=$daily-$expen;
+       
         
         return view('pages.backend.dashboard',compact('product','daily','expen','object'));
     }
@@ -74,7 +77,7 @@ class AdminController extends Controller
         return response()->json(['success'=>'Status change successfully.']);
     }
 
-    public function changeEcatestatus(Request $request)
+    public function changeExcatestatus(Request $request)
     {
         $excate = Excate::find($request->excate_id);
         $excate->status = $request->status;
@@ -86,13 +89,33 @@ class AdminController extends Controller
 
     public function retriveNetProfite(Request $request)
     {
-        return $request;
-        $excate = Excate::find($request->excate_id);
-        $excate->status = $request->status;
-        $excate->save();
+        $expen = Expen::select(
+            DB::raw("year(created_at) as monht"),
+            DB::raw("SUM(click) as total_click"),
+            DB::raw("SUM(viewer) as total_viewer")) 
+            ->orderBy(DB::raw("YEAR(created_at)"))
+            ->groupBy(DB::raw("YEAR(created_at)"))
+            ->get();
+
+            $result[] = ['Month','price','date'];
+            foreach ($expen as $key => $value) {
+            $result[++$key] = [$value->month, (int)$value->created_at, (int)$value->date];
+            }
+
+            return view('pages.backend.dashboard')
+                ->with('expen',json_encode($result));
+    
+        //return view('dashboard', compact('data'));
+
+    }
+
+    public function changeOrderstatus(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        $order->status = $request->status;
+        $order->save();
 
         return response()->json(['success'=>'Status change successfully.']);
-
     }
 
     public function logout()
@@ -101,4 +124,5 @@ class AdminController extends Controller
 
         return redirect('/admin');
     }
+    
 }

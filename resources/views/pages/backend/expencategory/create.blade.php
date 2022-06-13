@@ -66,10 +66,7 @@
                                             <tr>
                                                 <th>{{ $no++ }}</th>
                                                 <td>{{ $cata->name }}</td>
-                                                <td <input data-id="{{ $cata->id }}" class="toggle-class"
-                                                    type="checkbox" data-onstyle="success" data-offstyle="danger"
-                                                    data-toggle="toggle" data-on="Active" data-off="Suspend"
-                                                    {{ $cata->status ? 'checked' : '' }}></td>
+                                                <td><input data-id="{{$cata->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="Suspend" {{ $cata->status ? 'checked' : '' }}></td>
                                                 <td>{{ $cata->created_at->format('d M,Y') }}</td>
                                                 <td>
                                                     <div class="dropdown">
@@ -85,7 +82,7 @@
                                                                     <circle fill="#000000" cx="19" cy="12" r="2" />
                                                                 </g>
                                                             </svg>
-                                                        </button>
+                                                        </button> 
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item"
                                                                 href="{{ route('admin.excates.edit', $cata->id) }}">Edit</a>
@@ -114,6 +111,7 @@
 @endsection
 
 @push('css')
+
     <link href="{{ asset('backend/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     @endpush
     @push('js')
@@ -134,13 +132,14 @@
 <script>
     $(function() {
       $('.toggle-class').change(function() {
+
           var status = $(this).prop('checked') == true ? 1 : 0; 
           var excate_id = $(this).data('id'); 
            console.log(status);
           $.ajax({
               type: "GET",
               dataType: "json",
-              url: '/admin/changeEcatestatus',
+              url: '/admin/changeExcatestatus',
               data: {'status': status, 'excate_id': excate_id},
               success: function(data){
                 console.log(data.success)

@@ -63,8 +63,7 @@
                                                 <tr>
                                                     <th>Order ID</th>
                                                     <th>Date</th>
-                                                    <th>Customer Name</th>
-                                                    <th>Location</th>
+                                                    <th>Customer Name</th>                                                   
                                                     <th>Amount</th>
                                                     <th>Status Order</th>
                                                     <th></th>
@@ -76,11 +75,14 @@
                                                 <tr>
                                                     <td>{{ $no ++ }}</td>
                                                     <td class="w-space-no">{{ $order->created_at->format('d M,Y') }}</td>
-                                                    <td>{{ $order->user->name  }}</td>
-                                                    <td>null</td>
+                                                    <td>{{ $order->user->name  }}</td>                                                    
                                                     <td>{{ $order->amount }}</td>
-                                                    <td><span class="btn btn-sm light btn-warning w-space-no fs-16">New
-                                                            Order</span></td>
+                                                    <td>
+                                                        <input data-id="{{ $order->id }}" class="toggle-class"
+                                                        type="checkbox" data-onstyle="success" data-offstyle="warning"
+                                                        data-toggle="toggle" data-on="On Delivery" data-off="New Order"
+                                                        {{ $order->status ? 'checked' : '' }}>
+                                                    </td>
                                                     <td>
                                                         <div class="dropdown ms-auto text-right">
                                                             <div class="btn-link" data-bs-toggle="dropdown">
@@ -140,4 +142,26 @@
             ]
         });
     </script>
+
+<script>
+    $(function() {
+        $('.toggle-class').change(function() {
+            var status = $(this).prop('checked') == true ? 1 : 0;
+            var order_id = $(this).data('id');
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: '/admin/changeOrderstatus',
+                data: {
+                    'status': status,
+                    'order_id': order_id
+                },
+                success: function(data) {
+                    console.log(data.success)
+                }
+            });
+        })
+    })
+</script>
 @endpush
