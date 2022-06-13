@@ -12,7 +12,7 @@
                      <li ><a href="">Dashboard</a></li>
                      <li><a href="page-analytics.html">Analytics</a></li>
                      <li><a href="page-review.html">Review</a></li>
-                     <li><a href="page-order.html">Order</a></li>
+                     <li><a href="{{ route('admin.admin.details') }}">Order</a></li>
                      <li><a href="{{ route('admin.orders.index') }}">Order List</a></li>
                      <li><a href="page-general-customers.html">General Customers</a></li>
                  </ul>

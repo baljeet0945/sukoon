@@ -11,6 +11,7 @@ use App\Models\Dailysale;
 use App\Models\Expen;
 use App\Models\Excate;
 use App\Models\Order;
+use App\Models\Item;
 use Session;
 use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
@@ -123,6 +124,12 @@ class AdminController extends Controller
         session()->forget(['adminData']);
 
         return redirect('/admin');
+    }
+
+    public function OrderDetail()
+    {
+        $items = Item::all();
+        return view('pages.backend.orders.order-details',compact('items'));
     }
     
 }

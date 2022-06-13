@@ -34,4 +34,6 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
       
       Route::get('/net_profit/{show}', 'AdminController@retriveNetProfite');
 
+      Route::get('order-detail','AdminController@orderDetail')->name('admin.details');
+
 });
