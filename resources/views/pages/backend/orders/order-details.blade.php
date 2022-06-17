@@ -4,7 +4,7 @@
 <div class="content-body">
     <div class="container-fluid">
         <div class="me-auto d-none d-lg-block">
-            <h2 class="text-primary font-w600 mb-0">Order ID #5552351</h2>
+            <h2 class="text-primary font-w600 mb-0">Order Details</h2>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)" class="text-primary">Dashboard</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Order Detaills</a></li>
@@ -29,10 +29,10 @@
                                 
                                 <td>
                                     <div class="media">
-                                        <a href="ecom-product-detail.html"><img class="me-3 img-fluid rounded" width="85" src="./images/dish/pic1.jpg" alt="DexignZone"></a>
+                                        <a href="ecom-product-detail.html"><img class="me-3 img-fluid rounded" width="85" src="{{ asset('uploads/products/' . $item->products->image ?? null ) }}" alt="DexignZone"></a>
                                         <div class="media-body">
-                                            <small class="mt-0 mb-1 font-w500"><a class="text-primary" href="javascript:void(0);">BURGER</a></small>
-                                            <h5 class="mt-0 mb-2 mb-4"><a class="text-black" href="ecom-product-detail.html">{{ $item->product->product_name ?? null }}</a></h5>
+                                            <small class="mt-0 mb-1 font-w500"><a class="text-primary" href="javascript:void(0);"></a></small>
+                                            <h5 class="mt-0 mb-2 mb-4"><a class="text-black" href="ecom-product-detail.html">{{ $item->products->product_name ?? null }}</a></h5>
                                             <div class="star-review fs-14">
                                                 <i class="fa fa-star text-orange"></i>
                                                 <i class="fa fa-star text-orange"></i>
@@ -48,13 +48,13 @@
                                     <h4 class="my-0 text-secondary font-w600">{{ $item->qty }}X</h4>
                                 </td>
                                 <td>
-                                    <h4 class="my-0 text-secondary font-w600">&#8377;{{ $item->product->price ?? null }}</h4>
+                                    <h4 class="my-0 text-secondary font-w600">&#8377;{{ $item->products->price ?? null }}</h4>
                                 </td>
                                 <td>
-                                    <h4 class="my-0 text-secondary font-w600">&#8377;{{ $item->order->amount ?? null}}</h4>
+                                    <h4 class="my-0 text-secondary font-w600">&#8377;{{ $item->orders->amount ?? null}}</h4>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0);" class="ti-close fs-28 text-danger las la-times-circle"></a>
+                                    {{-- <a href="javascript:void(0);" class="ti-close fs-28 text-danger las la-times-circle"></a> --}}
                                 </td>
                                 
                             </tr>

@@ -11,12 +11,14 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
     Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
 
     Route::resources ([
-                        'category'  => CategoryController::class,
-                        'product'   => ProductController::class,
-                        'expens'    => ExpensiveController::class,
-                        'excates'   => ExcateController::class,
-                        'daily'     => DailysaleController::class,
-                        'orders'    => OrderController::class,
+                        'category'         => CategoryController::class,
+                        'product'          => ProductController::class,
+                        'expens'           => ExpensiveController::class,
+                        'excates'          => ExcateController::class,
+                        'daily'            => DailysaleController::class,
+                        'orders'           => OrderController::class,
+                        'employees'        => EmployeeController::class,
+                        'employee-advance' => EmployeeAdvanceController::class,
 
                       ]);
 
@@ -35,5 +37,7 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
       Route::get('/net_profit/{show}', 'AdminController@retriveNetProfite');
 
       Route::get('order-detail','AdminController@orderDetail')->name('admin.details');
+
+      // Route::get('fatch-advance','AdminController@fatchadvance');
 
 });

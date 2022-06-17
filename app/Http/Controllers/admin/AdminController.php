@@ -12,6 +12,7 @@ use App\Models\Expen;
 use App\Models\Excate;
 use App\Models\Order;
 use App\Models\Item;
+use App\Models\Employee;
 use Session;
 use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
@@ -131,5 +132,14 @@ class AdminController extends Controller
         $items = Item::all();
         return view('pages.backend.orders.order-details',compact('items'));
     }
+
+    // public function fatchadvance()
+    // {
+    //     $employees = Employee::all();
+
+    //     return response()->json([
+    //         'employees' =>$employees,
+    //     ]);
+    // }
     
 }
