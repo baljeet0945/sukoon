@@ -39,12 +39,12 @@
                                             </td>
                                             <td> &#8377;{{ $employee->amount }}</td>
                                             <td>
-                                                <a href="{{ route('admin.employees.show',$employee->id) }}"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                                     data-bs-whatever="@mdo">Show </a>
+                                                <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $employee->id }}" name="name"
+                                                data-bs-whatever="@mdo">Advance</a>
                                                                                         
-                                                    @foreach ($employees as $object)                                                      
+                                                    {{-- @foreach ($employees as $object)                                                       --}}
                                                    
-                                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                <div class="modal fade" id="exampleModal{{ $employee->id }}" tabindex="-1"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -55,24 +55,25 @@
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form>
+                                                                <form action="{{ route('admin.employees.store')}}" method="POST">
+                                                                    {{ csrf_field() }}
                                                                     <div class="mb-3">
                                                                         <label for="name"
                                                                             class="col-form-label">Name</label>
                                                                        
-                                                                        <input type="text" name="name" value="{{ ucwords($object->name ) }}"   class="form-control" id="name">
+                                                                        <input type="text" name="name" id="employee-name" value="{{ $employee->name }}"   class="form-control" id="name">
                                                                         
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label for="amount"
                                                                             class="col-form-label">Amount</label>
-                                                                        <input type="text" name="amount" class="form-control"
-                                                                            id="amount">
+                                                                        <input type="text" name="advance_amount" class="form-control"
+                                                                            id="advance_amount">
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label for="amount"
                                                                             class="col-form-label">Type</label>
-                                                                        <select class="form-select"
+                                                                        <select class="form-select" name="type"
                                                                             aria-label="Default select example">
                                                                             <option selected> select menu</option>
                                                                             @foreach ($advance as $object )                                                                             
@@ -95,7 +96,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @endforeach
+                                                {{-- @endforeach --}}
                                             </td>
                                             <td>{{ $employee->created_at->format('d M,Y') }}</td>
                                             <td>
@@ -135,18 +136,10 @@
 
     <script type="text/javascript">
        
-        $(document).ready(function () {
-            
-            $('#exampleModal').on(click,function () {
-              var employeeURL = $(this).data('url');
-              $.get(admin/employees/show, function (data) {
-                  $('#exampleModal').modal('exampleModal');
-                  $('#employee-id').text(data.id);
-                  $('#employee-name').text(data.name);                 
-              })
-           });
-            
-        });
+       function myFunction() {
+            var div = document.getElementsByTagName("div")[0].getAttribute("employees"); 
+            var id = div.getAttribute('data-id'); 
+        }
        
     </script>
 @endsection

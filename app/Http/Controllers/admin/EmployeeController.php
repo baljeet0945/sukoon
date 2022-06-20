@@ -17,11 +17,10 @@ class EmployeeController extends Controller
     {
         
         // $data       = Employee::where('id',1)->first(); 
-        $where = array('id' => 'id');
-        $data  = Employee::where($where)->first();   
-        $employees  = Employee::all();  
+       
+        $employees  = Employee::all();   
         $advance    = EmployeeAdvance::all();
-        return view('pages.backend.employees.index',compact('employees','advance','data'))->with('no',1);
+        return view('pages.backend.employees.index',compact('employees','advance'))->with('no',1);
     }
 
     public function advance($id)
@@ -49,6 +48,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request;
         $validated =  $request->validate([
             'name'       => 'required',
             'department' => 'required',
@@ -58,9 +58,11 @@ class EmployeeController extends Controller
 
         $employee = new Employee;
 
-        $employee->name        =$request->name;
-        $employee->department  =$request->department;
-        $employee->amount      =$request->amount;
+        $employee->name           =$request->name;
+        $employee->department     =$request->department;
+        $employee->amount         =$request->amount;
+        $employee->advance_amount =$request->advance_amount;
+        $employee->advance_id     =$request->type;
 
         $employee->save();
 
@@ -75,12 +77,12 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        
+        //return $id;
         $employees  = Employee::find($id);
 
         return response()->json($employees);
         // $employee = Employee::where('id',$id)->first();
-        // return view('pages.backend.employees.show',compact('employee'));
+         //return view('pages.backend.employees.index',compact('employees'))->with;
     }
 
     /**
