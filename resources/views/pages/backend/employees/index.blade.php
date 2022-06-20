@@ -39,7 +39,7 @@
                                             </td>
                                             <td> &#8377;{{ $employee->amount }}</td>
                                             <td>
-                                                <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $employee->id }}" name="name"
+                                                <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $employee->id }}" name="name"
                                                 data-bs-whatever="@mdo">Advance</a>
                                                                                         
                                                     {{-- @foreach ($employees as $object)                                                       --}}
@@ -55,8 +55,8 @@
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ route('admin.employees.store')}}" method="POST">
-                                                                    {{ csrf_field() }}
+                                                                <form action="{{ route('admin.admin.advance')}}" method="POST">
+                                                                    @csrf
                                                                     <div class="mb-3">
                                                                         <label for="name"
                                                                             class="col-form-label">Name</label>

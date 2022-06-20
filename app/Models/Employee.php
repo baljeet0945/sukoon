@@ -9,7 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','department','salary'];
+    protected $fillable = ['advance_id','advance_amount','name','department','amount'];
 
 
     public function employeeAdvance()

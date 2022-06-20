@@ -133,13 +133,16 @@ class AdminController extends Controller
         return view('pages.backend.orders.order-details',compact('items'));
     }
 
-    // public function fatchadvance()
-    // {
-    //     $employees = Employee::all();
+    public function store(Request $request)
+    {
+        $employees = new  Employee;
 
-    //     return response()->json([
-    //         'employees' =>$employees,
-    //     ]);
-    // }
+        $employees->advance_amount  =$request->advance_amount;
+        $employees->advance_id  =$request->type;
+
+        $employees->save();
+        
+        return redirect()->route('admin.employees.index')->with('message', 'Employee Add Successfuly!');
+    }
     
 }

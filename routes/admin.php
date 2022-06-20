@@ -38,6 +38,6 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
 
       Route::get('order-detail','AdminController@orderDetail')->name('admin.details');
 
-      // Route::get('fatch-advance','AdminController@fatchadvance');
+      Route::post('advance','AdminController@store')->name('admin.advance');
 
 });
