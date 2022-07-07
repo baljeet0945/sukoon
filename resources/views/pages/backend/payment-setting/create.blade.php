@@ -1,33 +1,37 @@
 @extends('layout.admin')
-@section('title', 'Employees Advance')
+@section('title', 'Advance Date')
 @section('content')
     <div class="content-body">
         <div class="container-fluid">
             <div class="col-lg-12">
                 <div class="card">
                     @if (session()->has('message'))
-                    <div class="alert alert-success" id="msg">
-                        {{ session()->get('message') }}
-                    </div>
+                        <div class="alert alert-success" id="msg">
+                            {{ session()->get('message') }}
+                        </div>
                     @endif
                     <div class="card-header">
-                        <h4 class="card-title">Employee Advance</h4>
+                        <h4 class="card-title">Payment Setting</h4>
                     </div>
                     <div class="card-body">
                         <div class="basic-form">
-                            <form action="{{ route('admin.employee-advance.store') }}" method="post">
+                            <form action="{{ route('admin.payment-setting.store') }}" method="post">
                                 @csrf
-                                <div class="mb-3">
-                                    <label class="col-sm-2 col-form-label col-form-label-sm">Name</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control form-control-sm" name="name"
-                                            placeholder="Enter Name">
-                                        @if ($errors->has('name'))
-                                            <span class="text-danger">{{ $errors->first('name') }}</span>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <input type="date" name="date" class="form-control" placeholder="Start Date">
+                                        @if ($errors->has('date'))
+                                            <span class="text-danger">{{ $errors->first('date') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="col-sm-6 mt-2 mt-sm-0">
+                                        <input type="date" name="date_end" class="form-control" placeholder="End Date">
+                                        @if ($errors->has('date_end'))
+                                            <span class="text-danger">{{ $errors->first('date_end') }}</span>
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12" style="padding:15px;">
                                     <button type="submit" class="btn btn-primary mb-2">Submit</button>
                                 </div>
                             </form>
@@ -39,32 +43,33 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">View Employee Advance</h4>
+                            <h4 class="card-title">View Payment Setting</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-responsive-sm" id="expensivecategory">
+
+                                <table class="table table-responsive-md" id="category">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            {{-- <th>Status</th> --}}
-                                            <th>Date</th>
+                                            <th style="width:80px;"><strong>#</strong></th>
+                                            <th><strong>Start Date</strong></th>
+                                            <th><strong>End Date</strong></th>                                           
+
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($employee as $advance)
-                                            
-                                        
+                                        @foreach ($data as $data1)
                                             <tr>
-                                                <th>{{ $no++ }}</th>
-                                                <td>{{ $advance->name }}</td>
-                                                <td>{{ $advance->created_at->format('d M,Y') }}</td>
-                                                {{-- <td></td> --}}
+                                                <td><strong>{{ $no++ }}</strong></td>
+                                                <td>{{ $data1->date }}</td>
+                                                <td>
+                                                   {{ $data1->date_end }}
+                                                </td>                                              
+
                                                 <td>
                                                     <div class="dropdown">
-                                                        <button type="button" class="btn btn-primary light sharp"
+                                                        <button type="button" class="btn btn-success light sharp"
                                                             data-bs-toggle="dropdown">
                                                             <svg width="20px" height="20px" viewBox="0 0 24 24"
                                                                 version="1.1">
@@ -76,20 +81,18 @@
                                                                     <circle fill="#000000" cx="19" cy="12" r="2" />
                                                                 </g>
                                                             </svg>
-                                                        </button> 
+                                                        </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item"
-                                                                href="">Edit</a>
-
-                                                                <a class="dropdown-item"
-                                                                href="">Delete</a>
-                                                            
+                                                                href="{{ route('admin.payment-setting.edit', $data1->id) }}">Edit</a>
+                                                            <a class="dropdown-item"
+                                                                onclick="deleteAdvance('{{ route('admin.payment-setting.destroy', $data1->id) }}')">Delete</a>
 
                                                         </div>
                                                     </div>
                                                 </td>
-                                            </tr>  
-                                            @endforeach                                     
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -97,6 +100,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-    @endsection
+@endsection

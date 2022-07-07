@@ -10,6 +10,7 @@
                             {{ session()->get('message') }}
                         </div>
                     @endif
+                    
                     <div class="card-header">
                         <h4 class="card-title">Employees Details</h4>
                         <a href="{{ route('admin.employees.create') }}" class="float-right">Add Employee</a>
@@ -24,25 +25,32 @@
                                         <th>Name</th>
                                         <th>Department</th>
                                         <th>Salary</th>
+                                        <th>Advance Total</th>
+                                        <th>Paybal</th>
                                         <th>Show</th>
-                                        <th>Date</th>
+                                        {{-- <th>Date</th> --}}
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                   
                                     @foreach ($employees as $employee)
-                                        <tr>
+                                    
+                                    <tr>
                                             <td><a href="javascript:void(0)">{{ $no++ }}</a>
                                             </td>
-                                            <td>{{ $employee->name }}</td>
+                                            <td>{{ $employee->name ?? null}}</td>
                                             <td><span class="text-muted">{{ $employee->department }}</span>
                                             </td>
-                                            <td> &#8377;{{ $employee->amount }}</td>
+                                            <td> &#8377;{{ $employee->amount }}</td> 
+                                            <td> &#8377;{{ $employee->total_advance ?? 0}}</td>
+
+                                             <td> &#8377;{{ ($employee->amount)-($employee->total_advance ?? 0) }}</td>    
+                                            
                                             <td>
                                                 <a href="" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $employee->id }}" name="name"
-                                                data-bs-whatever="@mdo">Advance</a>
-                                                                                        
-                                                    {{-- @foreach ($employees as $object)                                                       --}}
+                                                data-bs-whatever="@mdo">Advance</a>                                                                                   
+                                                                                                         
                                                    
                                                 <div class="modal fade" id="exampleModal{{ $employee->id }}" tabindex="-1"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,14 +63,14 @@
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ route('admin.admin.advance')}}" method="POST">
+                                                                <form action="{{ route('admin.employee-advance.store')}}" method="POST">
                                                                     @csrf
                                                                     <div class="mb-3">
                                                                         <label for="name"
                                                                             class="col-form-label">Name</label>
                                                                        
-                                                                        <input type="text" name="name" id="employee-name" value="{{ $employee->name }}"   class="form-control" id="name">
-                                                                        
+                                                                        <input type="text" name="name" id="name" value="{{ ucwords($employee->name) }}"   class="form-control" id="name">
+                                                                        <input type="hidden" name="employee_id" id="employee_id" value="{{ $employee->id }}"   class="form-control" id="employee_id">
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label for="amount"
@@ -78,7 +86,7 @@
                                                                             <option selected> select menu</option>
                                                                             @foreach ($advance as $object )                                                                             
                                                                             
-                                                                            <option value="{{ $object->id }}">{{ ucwords($object->name)}}</option>
+                                                                            <option value="{{ $object->id }}">{{ ucwords($object->name) }}</option>
                                                                            
                                                                             @endforeach
                                                                         </select>
@@ -95,10 +103,9 @@
 
                                                         </div>
                                                     </div>
-                                                </div>
-                                                {{-- @endforeach --}}
+                                                </div>                                                
                                             </td>
-                                            <td>{{ $employee->created_at->format('d M,Y') }}</td>
+                                            {{-- <td>{{ $employee->created_at->format('d M,Y') }}</td> --}}
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn btn-primary light sharp"
@@ -116,6 +123,7 @@
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item"
                                                             href="{{ route('admin.employees.edit', $employee->id) }}">Edit</a>
+                                                            <a class="dropdown-item" href="{{ route('admin.employees.show',$employee->id) }}">View</a>
                                                         <a class="dropdown-item" deleteEmployee
                                                             onclick="deleteEmployee('{{ route('admin.employees.destroy', $employee->id) }}')">Delete</a>
 
@@ -133,7 +141,6 @@
 
         </div>
     </div>
-
     <script type="text/javascript">
        
        function myFunction() {

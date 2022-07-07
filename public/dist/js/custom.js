@@ -221,3 +221,31 @@ function deleteEmployee(uri){
             }
         });
 }
+
+function deleteAdvance(uri){
+    //var result = confirm("Want to delete?");
+    Swal.fire({
+            title: 'Are you sure you want to Delete?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete',
+            }).then((result) => {
+            if (result.value)
+            {
+                $.ajax({
+                    url:   uri ,
+                    type: 'DELETE',
+
+                    success: function(result) {
+                       if(result.status){
+                             location.reload();
+                        }
+
+                    }
+                });
+            }
+        });
+}

@@ -4,10 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\EmployeeAdvance;
-use App\Models\Employee;
 use App\Models\AdvanceType;
-class EmployeeAdvanceController extends Controller
+class AdvanceTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +24,8 @@ class EmployeeAdvanceController extends Controller
      */
     public function create()
     {
-        
+        $employee = AdvanceType::all();
+        return view('pages.backend.Advancetype.create',compact('employee'))->with('no',1);
     }
 
     /**
@@ -37,16 +36,13 @@ class EmployeeAdvanceController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
-        $advance = new EmployeeAdvance;
+        $advance = new AdvanceType;
 
-        $advance->employee_id    = $request->employee_id;
-        $advance->type_id        = $request->type;
-        $advance->advance_amount = $request->advance_amount;
-        
+        $advance->name  =$request->name;
+
         $advance->save();
 
-        return redirect()->route('admin.employees.index')->with('message', 'Employee Add Successfuly!');
+        return redirect()->back()->with('message', 'Advance Type Add Successfuly!');
     }
 
     /**

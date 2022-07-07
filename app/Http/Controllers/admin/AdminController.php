@@ -133,16 +133,6 @@ class AdminController extends Controller
         return view('pages.backend.orders.order-details',compact('items'));
     }
 
-    public function store(Request $request)
-    {
-        $employees = new  Employee;
-
-        $employees->advance_amount  =$request->advance_amount;
-        $employees->advance_id  =$request->type;
-
-        $employees->save();
-        
-        return redirect()->route('admin.employees.index')->with('message', 'Employee Add Successfuly!');
-    }
+    
     
 }

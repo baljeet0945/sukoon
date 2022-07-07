@@ -4,10 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\EmployeeAdvance;
-use App\Models\Employee;
-use App\Models\AdvanceType;
-class EmployeeAdvanceController extends Controller
+use App\Models\PaymentSetting;
+class PaymentSettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +24,9 @@ class EmployeeAdvanceController extends Controller
      */
     public function create()
     {
-        
+        $data =PaymentSetting::all();
+
+        return view('pages.backend.payment-setting.create',compact('data'))->with('no',1);
     }
 
     /**
@@ -37,16 +37,20 @@ class EmployeeAdvanceController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request;
-        $advance = new EmployeeAdvance;
+        $validated =  $request->validate([
+            'date'     => 'required',
+            'date_end' => 'required',            
 
-        $advance->employee_id    = $request->employee_id;
-        $advance->type_id        = $request->type;
-        $advance->advance_amount = $request->advance_amount;
-        
-        $advance->save();
+        ]);
 
-        return redirect()->route('admin.employees.index')->with('message', 'Employee Add Successfuly!');
+        $payments = new PaymentSetting();
+
+        $payments->date  =$request->date;
+        $payments->date_end  =$request->date_end;
+
+        $payments->save();
+
+        return redirect()->back()->with('message','Date Stored Successfylly!');
     }
 
     /**
@@ -68,7 +72,8 @@ class EmployeeAdvanceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $advance = PaymentSetting::findorfail($id);
+        return view('pages.backend.payment-setting.edit',compact('advance'));
     }
 
     /**
@@ -80,7 +85,20 @@ class EmployeeAdvanceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated =  $request->validate([
+            'date'     => 'required',
+            'date_end' => 'required',            
+
+        ]);
+
+        $value = PaymentSetting::find($id);
+
+        $value->date  =$request->date;
+        $value->date_end  =$request->date_end;
+
+        $value->update();
+
+        return redirect()->route('admin.payment-setting.create')->with('message','Date Updated Successfylly!');
     }
 
     /**
@@ -91,6 +109,10 @@ class EmployeeAdvanceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $advance = PaymentSetting::findorfail($id);
+        
+        $advance->delete();
+        Session()->flash('message', 'Deleted Advance Date Successfully!');
+        return ['status' => 'true'];
     }
 }

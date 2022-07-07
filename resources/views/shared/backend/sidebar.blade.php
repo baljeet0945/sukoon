@@ -29,17 +29,7 @@
 
                  </ul>
              </li>
-
-             {{-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                     <i class="flaticon-381-network"></i>
-                     <span class="nav-text">Category</span>
-                 </a>
-                 <ul aria-expanded="false">
-                     <li><a href="">Add Category</a></li>
-                     <li><a href="{{ route('admin.category.index') }}">View Category </a></li>
-
-                 </ul>
-             </li> --}}
+             
 
              <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                      <i class="fa-solid fa-calendar-days"></i>
@@ -68,9 +58,10 @@
                     <span class="nav-text">Employees Details</span>
                 </a>
                 <ul aria-expanded="true">
-                    <li><a href="{{ route('admin.employees.index') }}">Add Employee</a></li>
-                    <li><a href="">View Employee </a></li>
-                    <li><a href="{{ route('admin.employee-advance.create') }}">Add Advance Type </a></li>
+                    <li><a href="{{ route('admin.employees.index') }}">Add Employee</a></li>                    
+                    <li><a href="{{ route('admin.advance-type.create') }}">Add Advance Type </a></li>
+                    <li><a href="">Employee Analytics </a></li>
+                    <li><a href="{{ route('admin.payment-setting.create') }}">Payments  Setting </a></li>
 
                 </ul>
                 </li>          

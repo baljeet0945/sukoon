@@ -9,11 +9,14 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['advance_id','advance_amount','name','department','amount'];
+    protected $fillable = ['name','department','amount'];
 
 
-    public function employeeAdvance()
-    {
-        return $this->hasOne(EmployeeAdvance::class,'id','employeeadvance_id');
+    public function employeeadvances(){
+        return $this->hasOne(EmployeeAdvance::class,'employee_id','id');
+    }
+
+    public function advanctypes(){
+        return $this->belongsTo(AdvanceType::class);
     }
 }
