@@ -79,10 +79,10 @@
                                                         </button> 
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item"
-                                                                href="">Edit</a>
-
+                                                                href="{{ route('admin.advance-type.edit',$advance->id) }}">Edit</a>
+                                                                
                                                                 <a class="dropdown-item"
-                                                                href="">Delete</a>
+                                                                onclick="deleteAdvanceType('{{ route('admin.advance-type.destroy', $advance->id) }}')">Delete</a>
                                                             
 
                                                         </div>

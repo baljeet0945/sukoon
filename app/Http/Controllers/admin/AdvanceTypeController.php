@@ -64,7 +64,9 @@ class AdvanceTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = AdvanceType::findorfail($id);
+
+        return view('pages.backend.Advancetype.edit',compact('data'));
     }
 
     /**
@@ -76,7 +78,13 @@ class AdvanceTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $advance =  AdvanceType::find($id);
+
+        $advance->name  =$request->name;
+
+        $advance->update();
+
+        return redirect()->route('admin.advance-type.create')->with('message', 'Advance Type Updated Successfuly!');
     }
 
     /**
@@ -87,6 +95,10 @@ class AdvanceTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $advance = AdvanceType::findorfail($id);
+
+        $advance->delete();
+        Session()->flash('message', 'Delete Advance Type  Successfully!');
+        return ['status' => 'true'];
     }
 }

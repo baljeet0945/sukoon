@@ -22,25 +22,25 @@ class EmployeeController extends Controller
     {       
         
         //   $employees       =Employee::all();
-        $paymentSettings = PaymentSetting::all()->toArray();       
+        $paymentSettings = PaymentSetting::all()->toArray();           
        
-        $from = $paymentSettings[0]['date'];
-        $to   = $paymentSettings[0]['date_end'];
+        $from_date = $paymentSettings[0]['date'];
+        $to_date   = $paymentSettings[0]['date_end'];   
 
-        $totalAdvance =  DB::select('select  employee_advances.employee_id, sum(employee_advances.advance_amount) as total_advance from `advance_types` inner join `employee_advances` on `employee_advances`.`type_id` = `advance_types`.`id` where `employee_id` = "'.'employee_id'.'" and `employee_advances`.`created_at` between "'.$from.'" and "'.$to.'"');
+        //$totalAdvance =  DB::select('select  employee_advances.employee_id, sum(employee_advances.advance_amount) as total_advance from `employees` left join `employees` on `employee_advances`.`empoyee_id` =  where `employee_advances` = "'.'employee_id'.'" and `employee_advances`.`created_at` between "'.$from_date.'" and "'.$to_date.'"');
         //return $totalAdvance;
         $employees  = Employee::select(\DB::raw('employees.*, SUM(advance_amount ) as total_advance '))
-                                ->leftJoin('employee_advances', 'employee_advances.employee_id', '=', 'employees.id')
-                                ->groupBy("employees.name")
-                                //->whereBetween('employee_advances.created_at',array($from, $to)) 
-                                ->get();       
+                                    ->leftJoin('employee_advances', 'employee_advances.employee_id', '=', 'employees.id')
+                                    ->groupBy("employees.id")
+                                    // ->whereBetween('employee_advances.created_at',array($from_date, $to_date )) 
+                                    ->get();       
        
        //return $employees;
 
-        $advance    = AdvanceType::all();
+        $advance = AdvanceType::all();
         
         
-        return view('pages.backend.employees.index',compact('employees','advance','totalAdvance'))->with('no',1);
+        return view('pages.backend.employees.index',compact('employees','advance'))->with('no',1);
     }
 
 
@@ -90,6 +90,7 @@ class EmployeeController extends Controller
     public function show($id)
     {
         //return $id;
+        //return $date;
         $employees  = Employee::find($id);           
         
         // $data = EmployeeAdvance::where('employee_id',$id)->sum('advance_amount');
@@ -117,7 +118,7 @@ class EmployeeController extends Controller
         //    $date = date('Y-m-d');
         //    $object =PaymentSetting:: date('Y-m-d', strtotime($date. ' + 1 months'));
            //return $newdate;
-
+        
         $payment = PaymentSetting::select('*')
                                     ->whereMonth('date', Carbon::now()->month) 
                                     ->first('id',$id);  
@@ -125,16 +126,18 @@ class EmployeeController extends Controller
                                     // for ($i = 1; $i <= 12; $i++) {
                                     //     $months[] = date("Y-m-05", strtotime( date( 'Y-m-05' )." $i months"));
                                     // }
-        $result = CarbonPeriod::create('2022-01-05', '1 month', '2022-12-05');
+        // $result = CarbonPeriod::create('2022-01-05', '1 month', '2022-12-05');
 
             // foreach ($result as $dt) {
             //     echo $dt->format("Y-m-05");
             // }
              //return $result;
         
-        
+        // $data1 = DB::table('date');
+        //  $data1->json_dencode('admin.employees.show',$data1->id);
+        // return $data1;
     
-        return view('pages.backend.employees.show',compact('totalAdvance', 'employees','advances','result','payment'));
+        return view('pages.backend.employees.show',compact('totalAdvance', 'employees','advances','payment'));
     
     }
 

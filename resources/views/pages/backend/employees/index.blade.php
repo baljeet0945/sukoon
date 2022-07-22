@@ -13,7 +13,7 @@
                     
                     <div class="card-header">
                         <h4 class="card-title">Employees Details</h4>
-                        <a href="{{ route('admin.employees.create') }}" class="float-right">Add Employee</a>
+                        <a href="{{ route('admin.employees.create') }}" class="float-right btn btn-success">Add Employee</a>
                     </div>
 
                     <div class="card-body">
@@ -57,8 +57,8 @@
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">New
-                                                                    message</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Add 
+                                                                    Advance</h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>

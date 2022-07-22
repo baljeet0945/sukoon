@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
 
-Route::group(['middleware' => 'web','as'=>'admin.'], function()
+Route::group(['middleware' => 'admin','as'=>'admin.'], function()
 {
     //Route::get('admin','AdminController@signin');
     Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
@@ -38,10 +38,7 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
 
       Route::get('order-detail','AdminController@orderDetail')->name('admin.details');
 
-      // Route::get('payment-setting','PaymentSettingController@create')->name('payment.setting');
-      // Route::post('payment-store','PaymentSettingController@store')->name('payment.store');
-      // Route::get('payment-edit/{id}','PaymentSettingController@edit')->name('payment.edit');
-      // Route::post('payment-update/{id}','PaymentSettingController@update')->name('payment.update');
-      // Route::post('payment-delete/{id}','PaymentSettingController@destroy')->name('payment.destroy');
+      Route::get('ajaxData','AdminController@ajaxData');
+      
 
 });

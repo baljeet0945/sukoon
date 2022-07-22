@@ -14,7 +14,9 @@ use App\Http\Controllers\FrontendController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route::prefix('admin')->middleware('auth')->group(function () {
+    
+// });
 Route::get('/admin', 'admin\AdminController@signin');
 
 Route::post('/admin-login','admin\AdminController@adminLogin')->name('admin.login');

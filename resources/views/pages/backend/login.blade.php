@@ -33,6 +33,11 @@
 									<div class="text-center mb-3">
 										<a href="index.html"><img  style="width:250px;"src="{{ asset('backend/images/sukoon.png') }}" alt=""></a>
 									</div>
+                                    @if (session()->has('errors'))
+                                        <div class="alert alert-danger" id="msg">
+                                            {{ session()->get('errors') }}
+                                        </div>
+                                    @endif
                                     <h4 class="text-center mb-4">Sign in your account</h4>
                                     <form action="{{ route('admin.login') }}" method="post">
                                         @csrf
