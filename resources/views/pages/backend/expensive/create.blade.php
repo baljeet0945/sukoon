@@ -27,7 +27,7 @@
                                             <select name="category" class="default-select form-control wide mb-3">
                                                 <option value="">Select Category</option>
                                                 @foreach ($excate as $value)
-                                                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                    <option value="{{ $value->id }}">{{ $value->excate->name }}</option>
                                                 @endforeach
                                             </select>
                                             @if ($errors->has('name'))
@@ -77,12 +77,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $expen)
+                                        @foreach ($excate as $data)
                                             <tr>
                                                 <th>{{ $no++ }}</th>
-                                                <td>{{ $expen->name }}</td>
-                                                <td> &#8377;{{ $expen->price }}</td>
-                                                <td>{{ $expen->created_at->format('d M,Y') }}</td>
+                                                <td>{{ $data->excate->name ?? null }}</td>
+                                                <td> &#8377;{{ $data->price  }}</td>
+                                                <td>{{ $data->created_at->format('d M,Y') }}</td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn btn-primary light sharp"
@@ -100,9 +100,9 @@
                                                         </button>
                                                         <div class="dropdown-menu">
                                                             <a class="dropdown-item"
-                                                                href="{{ route('admin.expens.edit', $expen->id) }}">Edit</a>
+                                                                href="{{ route('admin.expens.edit', $data->id) }}">Edit</a>
                                                             <a class="dropdown-item"
-                                                                onclick="deleteExpensive('{{ route('admin.expens.destroy', $expen->id) }}')">Delete</a>
+                                                                onclick="deleteExpensive('{{ route('admin.expens.destroy', $data->id) }}')">Delete</a>
 
                                                         </div>
                                                     </div>

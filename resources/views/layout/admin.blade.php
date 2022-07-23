@@ -49,16 +49,15 @@
      <script src="{{ asset('backend/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
 
      <!-- Apex Chart -->
-     <script src="{{ asset('backend/vendor/apexchart/apexchart.js') }}"></script>
+     {{-- <script src="{{ asset('backend/vendor/apexchart/apexchart.js') }}"></script> --}}
 
      <!-- Chart piety plugin files -->
      <script src="{{ asset('backend/vendor/peity/jquery.peity.min.js') }}"></script>
+    
 
      <!-- Dashboard 1 -->
-     <script src="{{ asset('backend/js/dashboard/dashboard-1.js') }}"></script>
-      <!-- Chart ChartJS plugin files -->
-    <script src="{{ asset('backend/vendor/chart.js/Chart.bundle.min.js') }}"></script>
-    <script src="{{ asset('backend/js/plugins-init/chartjs-init.js') }}"></script>
+     {{-- <script src="{{ asset('backend/js/dashboard/dashboard-1.js') }}"></script> --}}
+     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="{{ asset('dist/js/custom.js') }}"></script>

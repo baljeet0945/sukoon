@@ -27,13 +27,9 @@ class ExpensiveController extends Controller
      */
     public function create()
     {
-        //$data =Expen::all();
-        $excate = Excate::all();
-        $data = Expen::join('excates', function ($join) {
-                            $join->on('excates.id', '=', 'expens.excate_id');   
-                            })->get();
+        $excate = Expen::all();      
         
-        return view('pages.backend.expensive.create',compact('data','excate'))->with('no',1);
+        return view('pages.backend.expensive.create',compact('excate'))->with('no',1);
 
         
     }
@@ -52,9 +48,7 @@ class ExpensiveController extends Controller
 
         ]);
 
-        $data =new Expen();
-
-        //$data->category =$request->category;
+        $data =new Expen();        
         $data->price =$request->price;
         $data->excate_id = $request->category;
 
@@ -127,7 +121,7 @@ class ExpensiveController extends Controller
         $expen = Expen::findorfail($id);
         $excate = Excate::findorfail($expen->excate_id);
         $expen->delete();
-        $expen->delete();
+        $excate->delete();
         Session()->flash('message', 'Delete Expensive Successfully!');
         return ['status' => 'true'];
         

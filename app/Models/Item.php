@@ -12,4 +12,14 @@ class Item extends Model
     protected $fillable =[
         'order_id','product_id','qty','status'
     ];
+
+    public function orders()
+    {
+        return $this->hasOne(Order::class,'id','order_id');
+    }
+
+    public function products()
+    {
+        return $this->hasOne(Product::class,'id','product_id');
+    }
 }
