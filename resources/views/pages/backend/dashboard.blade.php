@@ -284,7 +284,7 @@
                             <div class="widget-timeline-icon">
                                 <div class="row align-items-center">
                                     <div class="col-xl-3 col-lg-2 col-xxl-4 col-sm-3 col-md-3 my-2 text-center text-sm-left">
-                                         <div id="chart2" class="d-inline-block"></div>
+                                         <div id="chart244" class="d-inline-block"></div>
                                     </div>
                                     <div class="col-xl-9 col-lg-10 col-xxl-8 col-sm-9 col-md-9">
                                         <div class="d-flex align-items-center mb-3">
@@ -386,15 +386,15 @@
             </div>
             <div class="col-xl-6 col-xxl-6 col-lg-12 col-md-12">
                 <div class="card">
-                    <div class="card-header border-0 pb-0 d-sm-flex d-block">
+                    <div class="card-header border-0 pb-0 d-sm-flex d-block">                      
                         <div>
                             <h4 class="card-title mb-1">Revenue</h4>
                             <small class="mb-0">Lorem ipsum dolor sit amet, consectetur</small>
                         </div>
-                        <select class="form-control style-1 default-select  mt-3 mt-sm-0">
-                            <option>Monthly</option>
-                            <option>Weekly</option>
-                            <option>Daily</option>
+                        <select class="form-control revenueSale style-1 default-select  mt-3 mt-sm-0">
+                            <option value="month">Monthly</option>
+                            <option value="week">Weekly</option>
+                            <option value="daily">Daily</option>
                         </select>
                     </div>
                     <div class="card-body revenue-chart px-3">
@@ -403,18 +403,32 @@
                                     <img src="{{ asset('backend/images/svg/ic_stat2.svg') }}" height="22" width="22" class="me-2 mb-1" alt=""/>
                                     <div>
                                         <small class="text-dark fs-14">Income</small>
-                                        <h3 class="font-w600 mb-0">&#8377;<span class="counter">{{ $daily }}</span>k</h3>
+                                        <h3 class="font-w600 mb-0">&#8377;<span class="counter filterByData">
+                                            {{ $daily }}</span>k
+                                        </h3>                                        
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-end mb-2">
                                     <img src="{{ asset('backend/images/svg/ic_stat1.svg') }}" height="22" width="22" class="me-2 mb-1" alt=""/>
                                     <div>
                                         <small class="text-dark fs-14">Expense</small>
-                                        <h3 class="font-w600 mb-0">&#8377;<span class="counter">{{ $expen }}</span>k</h3>
+                                        <h3 class="font-w600 mb-0">&#8377;
+                                            <span class="counter expenTotal">{{ $expen }}</span>k
+                                        </h3>
                                     </div>
                                 </div>
                             </div>
-                        <div id="chartBar"></div>
+                        <!--------------Charts--------------------->
+                        
+                            <span class="loadingData font-w600" style="display:none;color:#f72b50;">Loading...</span>
+                            <div id="chartBar" class="monthlyChart"></div>
+                            <div id="weeklychartBar" class="weeklyChart" style="display:none;color:#2bc155;">
+                                <div id="weekltchartincome"></div>
+                            </div>                                
+                            <div class="dailyChart" style="display:none;color:#2bc155;">
+                                <div id="dailychartincome"></div>
+                            </div>                                
+                        <!--------------End Charts--------------------->
                     </div>
                 </div>
             </div>
@@ -422,10 +436,11 @@
                 <div id="user-activity" class="card">
                     <div class="card-header border-0 pb-0 d-sm-flex d-block">
                         <div>
-                            <h4 class="card-title mb-1">Customer Map</h4>
+                            <h4 class="card-title mb-1">Daily Sale</h4>
                             <small class="mb-0">Lorem Ipsum is simply dummy text of the printing</small>
+                            
                         </div>
-                        <div class="card-action card-tabs mt-3 mt-sm-0">
+                        <!--div class="card-action card-tabs mt-3 mt-sm-0">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-bs-toggle="tab" href="#user" role="tab">
@@ -443,12 +458,13 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
+                        </div-->
                     </div>
                     <div class="card-body">
+                    <canvas id="barChart_2" class="chartjs-render-monitor"></canvas>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="user" role="tabpanel">
-                                <canvas id="activity" class="chartjs"></canvas>
+                                                               
                             </div>
                         </div>
                     </div>
@@ -472,4 +488,421 @@
 </div>
 @endsection
 
+@push('js')
+    <script>        
+        $('.revenueSale').on('change', function() {
+           var filterBy = $(this).val();
+           //console.log(filterBy);
+           $.ajax({                    
+                    url : "{{ url('admin/filterBy') }}",
+                    data : {'filterBy' : filterBy},
+                    type : 'GET',
+                    dataType : 'json',
+                    beforeSend: function(msg){
+                        $(".loadingData").css('display','block');
+                        $('.monthlyChart').css('display','none');
+                        $('.weeklyChart').css('display','none');                        
+                        $('.dailyChart').css('display','none'); 
+                        $('.filterByData').text('0');
+                        $('.expenTotal').text('0'); 
+                                            
+                    },
+                    success : function(result){ 
+                        if(result.monthlyData){ 
+                            $(".loadingData").css('display','none');
+                            $('.monthlyChart').css('display','block');
+                            $('.weeklyChart').css('display','none');                            
+                            $('.dailyChart').css('display','none');               
+                            $('.filterByData').text(result.success);
+                            $('.expenTotal').text(result.expenMonthly);                            
+                        } else if(result.weeklyData){ 
+                            $(".loadingData").css('display','none');
+                            $('.weeklyChart').css('display','block');
+                            $('.monthlyChart').css('display','none');
+                            $('.dailyChart').css('display','none'); 
+                            $('.filterByData').text(result.success);
+                            $('.expenTotal').text(result.expenWeek);                           
+                        } else if(result.dailyData){
+                            $(".loadingData").css('display','none');
+                            $('.weeklyChart').css('display','none');
+                            $('.monthlyChart').css('display','none');                        
+                            $('.dailyChart').css('display','block');
+                            $('.filterByData').text(result.success);
+                            $('.expenTotal').text(result.expenDailyTotal); 
+                        }                       
+                    }
+            });
+        });
+    
+    var chartBar = function(){	
+		var options = {
+			series: [
+				{
+					name: 'Net Profit',
+					data: [{{$monthlyTotalIncome}}],
+					//radius: 12,	
+				}, 
+				{
+				  name: 'Revenue',
+				  data: [{{$getMonthExpense}}]
+				},				
+			],
+				chart: {
+				type: 'area',
+				height: 350,
+				toolbar: {
+					show: false,
+				},				
+			},
+			plotOptions: {
+			  bar: {
+				horizontal: false,
+				columnWidth: '55%',
+				endingShape: 'rounded'
+			  },
+			},
+			colors:['#2f4cdd', '#b519ec'],
+			dataLabels: {
+			  enabled: false,
+			},
+			markers: {
+		shape: "circle",
+		},
+			legend: {
+				show: true,
+				fontSize: '12px',
+				
+				labels: {
+					colors: '#000000',
+					
+				},
+				position: 'top',
+				horizontalAlign: 'left', 	
+				markers: {
+					width: 19,
+					height: 19,
+					strokeWidth: 0,
+					strokeColor: '#fff',
+					fillColors: undefined,
+					radius: 4,
+					offsetX: -5,
+					offsetY: -5	
+				}
+			},
+			stroke: {
+			  show: true,
+			  width: 4,
+			  colors:['#2f4cdd', '#b519ec'],
+			},
+			
+			grid: {
+				borderColor: '#eee',
+			},
+			xaxis: {
+				
+			  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July','Aug','Sept','Oct','Nov','Dec'],
+			  labels: {
+				style: {
+					colors: '#3e4954',
+					fontSize: '13px',
+					fontFamily: 'Poppins',
+					fontWeight: 100,
+					cssClass: 'apexcharts-xaxis-label',
+				},
+			  },
+			  crosshairs: {
+			  show: false,
+			  }
+			},
+			yaxis: {
+				labels: {
+			   style: {
+				  colors: '#3e4954',
+				  fontSize: '13px',
+				   fontFamily: 'Poppins',
+				  fontWeight: 100,
+				  cssClass: 'apexcharts-xaxis-label',
+			  },
+			  },
+			},
+			fill: {
+			  opacity: 1
+			},
+			tooltip: {
+			  y: {
+				formatter: function (val) {
+				  return "$ " + val + " thousands"
+				}
+			  }
+			}
+			};
 
+			var chartBar = new ApexCharts(document.querySelector("#chartBar"), options);
+			chartBar.render();
+	}
+    
+    // Daily Income Chart
+   
+    var dailychartincome = function(){	
+		var options = {
+			series: [
+				{
+					name: 'Net Profit',
+					data: [{{$EverydayIncome}}],
+					//radius: 12,	
+				}, 
+				{
+				  name: 'Revenue',
+				  data: [{{$EverydaydaysExpen}}]
+				},				
+			],
+				chart: {
+				type: 'area',
+				height: 350,
+				toolbar: {
+					show: false,
+				},				
+			},
+			plotOptions: {
+			  bar: {
+				horizontal: false,
+				columnWidth: '55%',
+				endingShape: 'rounded'
+			  },
+			},
+			colors:['#2f4cdd', '#b519ec'],
+			dataLabels: {
+			  enabled: false,
+			},
+			markers: {
+		shape: "circle",
+		},
+			legend: {
+				show: true,
+				fontSize: '12px',
+				
+				labels: {
+					colors: '#000000',
+					
+				},
+				position: 'top',
+				horizontalAlign: 'left', 	
+				markers: {
+					width: 19,
+					height: 19,
+					strokeWidth: 0,
+					strokeColor: '#fff',
+					fillColors: undefined,
+					radius: 4,
+					offsetX: -5,
+					offsetY: -5	
+				}
+			},
+			stroke: {
+			  show: true,
+			  width: 4,
+			  colors:['#2f4cdd', '#b519ec'],
+			},
+			
+			grid: {
+				borderColor: '#eee',
+			},
+			xaxis: {
+				
+			  categories: [{{$currentNumberOfDays}}],
+			  labels: {
+				style: {
+					colors: '#3e4954',
+					fontSize: '13px',
+					fontFamily: 'Poppins',
+					fontWeight: 100,
+					cssClass: 'apexcharts-xaxis-label',
+				},
+			  },
+			  crosshairs: {
+			  show: false,
+			  }
+			},
+			yaxis: {
+				labels: {
+			   style: {
+				  colors: '#3e4954',
+				  fontSize: '13px',
+				   fontFamily: 'Poppins',
+				  fontWeight: 100,
+				  cssClass: 'apexcharts-xaxis-label',
+			  },
+			  },
+			},
+			fill: {
+			  opacity: 1
+			},
+			tooltip: {
+			  y: {
+				formatter: function (val) {
+				  return "$ " + val + " thousands"
+				}
+			  }
+			}
+			};
+
+			var chartBar = new ApexCharts(document.querySelector("#dailychartincome"), options);
+			chartBar.render();
+	}
+
+    // weekltchartincome Income Chart   
+    var weekltchartincome = function(){	
+		var options = {
+			series: [
+				{
+					name: 'Net Profit',
+					data: ['200','500','800','600','100'],
+					//radius: 12,	
+				}, 
+				{
+				  name: 'Revenue',
+				  data: ['2001','5001','8001','6001','1001']
+				},				
+			],
+				chart: {
+				type: 'area',
+				height: 350,
+				toolbar: {
+					show: false,
+				},				
+			},
+			plotOptions: {
+			  bar: {
+				horizontal: false,
+				columnWidth: '55%',
+				endingShape: 'rounded'
+			  },
+			},
+			colors:['#2f4cdd', '#b519ec'],
+			dataLabels: {
+			  enabled: false,
+			},
+			markers: {
+		shape: "circle",
+		},
+			legend: {
+				show: true,
+				fontSize: '12px',
+				
+				labels: {
+					colors: '#000000',
+					
+				},
+				position: 'top',
+				horizontalAlign: 'left', 	
+				markers: {
+					width: 19,
+					height: 19,
+					strokeWidth: 0,
+					strokeColor: '#fff',
+					fillColors: undefined,
+					radius: 4,
+					offsetX: -5,
+					offsetY: -5	
+				}
+			},
+			stroke: {
+			  show: true,
+			  width: 4,
+			  colors:['#2f4cdd', '#b519ec'],
+			},
+			
+			grid: {
+				borderColor: '#eee',
+			},
+			xaxis: {
+				
+			  categories: [{{$TotalsWeeksMonth}}],
+			  labels: {
+				style: {
+					colors: '#3e4954',
+					fontSize: '13px',
+					fontFamily: 'Poppins',
+					fontWeight: 100,
+					cssClass: 'apexcharts-xaxis-label',
+				},
+			  },
+			  crosshairs: {
+			  show: false,
+			  }
+			},
+			yaxis: {
+				labels: {
+			   style: {
+				  colors: '#3e4954',
+				  fontSize: '13px',
+				   fontFamily: 'Poppins',
+				  fontWeight: 100,
+				  cssClass: 'apexcharts-xaxis-label',
+			  },
+			  },
+			},
+			fill: {
+			  opacity: 1
+			},
+			tooltip: {
+			  y: {
+				formatter: function (val) {
+				  return "$ " + val + " thousands"
+				}
+			  }
+			}
+			};
+
+			var chartBar = new ApexCharts(document.querySelector("#weekltchartincome"), options);
+			chartBar.render();
+	}
+
+    // Daily Sales Chart  
+    
+    var barChart2 = function(){
+		if(jQuery('#barChart_2').length > 0 )
+        {
+            const barChart_2 = document.getElementById("barChart_2").getContext('2d');
+			const barChart_2gradientStroke = barChart_2.createLinearGradient(0, 0, 0, 250);
+			barChart_2gradientStroke.addColorStop(0, "rgba(0,161,91)");
+			barChart_2gradientStroke.addColorStop(1, "rgba(0,161,91, 0.5)");
+
+			barChart_2.height = 100;
+
+			new Chart(barChart_2, {
+				type: 'bar',
+				data: {
+					defaultFontFamily: 'Poppins',
+					labels: [{{$currentNumberOfDays}}],
+					datasets: [
+						{
+							label: "Income",
+							data: [{{$EverydayIncome}}],
+							borderColor: barChart_2gradientStroke,
+							borderWidth: "0",
+							backgroundColor: barChart_2gradientStroke, 
+							hoverBackgroundColor: barChart_2gradientStroke
+						}
+					]
+				},
+				options: {
+					legend: false, 
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}],
+						xAxes: [{
+							// Change here
+							barPercentage: 0.5
+						}]
+					}
+				}
+			});
+		}
+	}
+
+    </script>
+@endpush

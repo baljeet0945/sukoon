@@ -9,7 +9,7 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
 {
     //Route::get('admin','AdminController@signin');
     Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
-
+    Route::get('filterBy', 'AdminController@filterBy');
     Route::resources ([
                         'category'  => CategoryController::class,
                         'product'   => ProductController::class,
@@ -30,7 +30,6 @@ Route::group(['middleware' => 'web','as'=>'admin.'], function()
 
       //Route::get('chart-line', 'ChartController@chartLine');
       //Route::get('chart-line-ajax', 'ChartController@chartLineAjax');
-
-      Route::get('/net_profit/{show}', 'AdminController@retriveNetProfite');
+      Route::get('net_profit/{show}', 'AdminController@retriveNetProfite');
 
 });
